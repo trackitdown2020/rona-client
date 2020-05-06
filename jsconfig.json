@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "allowSyntheticDefaultImports": false,
+        "baseUrl": "./src",
+        "paths": {
+            "actions": ["src/actions"],
+            "components": ["src/components"],
+            "features": ["src/features"],
+            "reducers": ["src/reducers"],
+            "hooks": ["src/hooks"],
+            "mocks": ["src/mocks"],
+            "lib": ["src/lib"]
+        }
+    },
+    "exclude": ["node_modules", "dist"]
+}
