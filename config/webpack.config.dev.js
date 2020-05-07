@@ -79,13 +79,13 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
-      // 'actions': path.resolve(__dirname, 'src/actions'),
-      // 'components': path.resolve(__dirname, 'src/components'),
-      // 'features': path.resolve(__dirname, 'src/features'),
-      // 'reducers': path.resolve(__dirname, 'src/reducers'),
-      // 'hooks': path.resolve(__dirname, 'src/hooks'),
-      // 'mocks': path.resolve(__dirname, 'src/mocks'),
-      // 'lib': path.resolve(__dirname, 'src/lib'),
+      'actions': path.resolve(__dirname, 'src/actions'),
+      'components': path.resolve(__dirname, 'src/components'),
+      'features': path.resolve(__dirname, 'src/features'),
+      'reducers': path.resolve(__dirname, 'src/reducers'),
+      'hooks': path.resolve(__dirname, 'src/hooks'),
+      'mocks': path.resolve(__dirname, 'src/mocks'),
+      'lib': path.resolve(__dirname, 'src/lib'),
     }
   },
   
