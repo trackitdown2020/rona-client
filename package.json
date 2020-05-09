@@ -8,6 +8,8 @@
     "@mdi/font": "^5.1.45",
     "@mdi/js": "^5.1.45",
     "@mdi/react": "^1.4.0",
+    "clsx": "^1.1.0",
+    "moment": "^2.25.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1"
