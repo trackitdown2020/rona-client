@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExpansionPanel } from './ExpansionPanel';
+import { ExpansionPanel } from './ExpansionPanel.jsx';
 import { ExpansionPanelSummary } from './ExpansionPanelSummary';
 import { ExpansionPanelDetails } from './ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
