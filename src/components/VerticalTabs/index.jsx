@@ -2,7 +2,7 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "./TabPanel";
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 
 function a11yProps(index) {
   return {
