@@ -3,10 +3,13 @@ import { DashboardBase } from '../features/dashboard-base'
 import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
 import { GoogleNewsfeed } from '../features/google-newsfeed';
+import { TwitterFeed } from '../features/twitter-feed';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-      width: 350,
+      width: 450,
+
     },
 }));
 
@@ -41,8 +44,17 @@ function Home() {
   const renderNewsfeed = () => {
     return (
       <div className={classes.container}>
-        <GoogleNewsfeed/>
+          <Grid
+            container
+            direction="column"
+            justify="space-between"
+            alignItems="center"
+          >
+          <GoogleNewsfeed/>
+          <TwitterFeed/>
+        </Grid>
       </div>
+    
     )
   }
 
