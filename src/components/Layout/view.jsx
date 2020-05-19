@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { VerticalTabs } from 'components/VerticalTabs';
+import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 450;
 
@@ -31,8 +32,14 @@ const useStyles = makeStyles((theme) => ({
   content: {},
 }));
 
-export default function DashboardBase({ title, children, renderToolbar }) {
+export function View({ classes1 = {}, title, children, renderToolbar }) {
   const classes = useStyles();
+
+  const tabs = [
+    { label: 'Maps', content: <h1>Test</h1> },
+    { label: 'Heat Maps', content: <h1>Heat Map</h1> },
+    { label: 'Chart 1', content: <h1>Chart 1</h1> },
+  ];
 
   return (
     <div className={classes.root}>
@@ -46,7 +53,10 @@ export default function DashboardBase({ title, children, renderToolbar }) {
       </AppBar>
       <main className={classes.main}>
         <Toolbar />
-        <div className={classes.content}>{children}</div>
+        <div className={classes.content}>
+          {/* TODO use a route and make this into a different component */}
+          <VerticalTabs tabs={tabs} />
+        </div>
       </main>
       <Drawer
         className={classes.drawer}
@@ -64,5 +74,3 @@ export default function DashboardBase({ title, children, renderToolbar }) {
     </div>
   );
 }
-
-export { DashboardBase };

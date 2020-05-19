@@ -8,7 +8,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path={'/'} component={Layout} />
-      {/* <Route path={'/track'} component={TrackDashboad}/> */}
+      {/* <Route path={'/track'} component={TrackDashboad} /> */}
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
