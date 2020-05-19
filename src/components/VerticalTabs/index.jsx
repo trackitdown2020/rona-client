@@ -45,18 +45,20 @@ function VerticalTabs({ tabs }) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        {tabs.map((tab, index) => {
-          const { label } = tab;
-          return <Tab label={label} {...a11yProps(index)} />;
-        })}
+        {tabs.map((tab, index) => (
+          <Tab key={tab.label} label={tab.label} {...a11yProps(index)} />
+        ))}
       </Tabs>
-      {tabs.map((tab, index) => {
-        return (
-          <TabPanel className={classes.content} value={value} index={index}>
-            {tab.content}
-          </TabPanel>
-        );
-      })}
+      {tabs.map((tab, index) => (
+        <TabPanel
+          className={classes.content}
+          key={tab.label}
+          value={value}
+          index={index}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
     </div>
   );
 }

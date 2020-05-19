@@ -36,13 +36,13 @@ const renderList = () => (
   </>
 );
 
-export default { title: 'Dashboard Base' };
+export default { title: 'Layout' };
 
-export function LayoutExample() {
+export function Example() {
   const classes = useStyles();
 
   return (
-    <View title={'Example'} renderToolbar={renderList} classes={classes}>
+    <View title="Example" renderToolbar={renderList} classes={classes}>
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
