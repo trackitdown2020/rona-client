@@ -25,51 +25,44 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: 'auto',
   },
-  content: {
+  main: {
     flexGrow: 1,
-    padding: theme.spacing(3),
   },
+  content: {},
 }));
 
-export default function DashboardBase(props) {
-    const {
-        title,
-        renderContent,
-        renderToolbar
-    } = props;
-  
-    const classes = useStyles();
+export default function DashboardBase({ title, children, renderToolbar }) {
+  const classes = useStyles();
 
-    return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                <Typography variant="h6" noWrap>
-                    { title }
-                </Typography>
-                </Toolbar>
-            </AppBar>
-            <main className={classes.content}>
-                <Toolbar />
-                { renderContent && renderContent() }
-            </main>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                paper: classes.drawerPaper,
-                }}
-                anchor="right"
-            >
-                <Toolbar />
-                <div className={classes.drawerContainer}>
-                    { renderToolbar && renderToolbar() }
-                </div>
-            </Drawer>
-
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            {title}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main className={classes.main}>
+        <Toolbar />
+        <div className={classes.content}>{children}</div>
+      </main>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="right"
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
+          {renderToolbar && renderToolbar()}
         </div>
-    );
+      </Drawer>
+    </div>
+  );
 }
 
 export { DashboardBase };

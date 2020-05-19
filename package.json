@@ -16,7 +16,8 @@
     "react-leaflet": "^2.7.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "react-use": "^15.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
