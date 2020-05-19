@@ -3,8 +3,7 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { ListItems } from '../../components/ListItems';
-import { TwitterItem } from '../../components/ListItems/components'
-
+import { TwitterItem } from '../../components/ListItems/components';
 
 function TwitterFeed() {
     const { value, error, loading } = useAsync(async () => {
@@ -17,11 +16,9 @@ function TwitterFeed() {
         if(loading || !value) {
             return <LoadingSpinner/>
         }
-    
         if(error) {
             console.log(error);
         }
-
         return <ListItems items={value} ItemComponent={TwitterItem}/>
     }
 

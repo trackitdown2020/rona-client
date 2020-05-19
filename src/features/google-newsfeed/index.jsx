@@ -6,6 +6,7 @@ import { ListItems } from '../../components/ListItems';
 import { GoogleNewsItem } from '../../components/ListItems/components'
 
 
+
 function GoogleNewsfeed() {
     const { value, error, loading } = useAsync(async () => {
         const response = await fetch('http://localhost:8080/google/everything?q=coronavirus+covid-19')
@@ -17,11 +18,9 @@ function GoogleNewsfeed() {
         if(loading || !value) {
             return <LoadingSpinner/>
         }
-    
         if(error) {
             console.log(error);
         }
-
         return <ListItems items={value} ItemComponent={GoogleNewsItem}/>
     }
 
