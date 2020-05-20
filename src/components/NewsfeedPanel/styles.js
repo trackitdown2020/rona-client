@@ -16,5 +16,5 @@ export const useStyles = makeStyles((theme) => ({
     },
     header: {
         backgroundColor: "#c0deed"
-    }
+    },
 }));

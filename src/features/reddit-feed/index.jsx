@@ -3,12 +3,11 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { ListItems } from '../../components/ListItems';
-import { GoogleNewsItem } from '../../components/ListItems/components'
+import { RedditPostItem } from '../../components/ListItems/components';
 
-
-function GoogleNewsfeed() {
+function RedditFeed() {
     const { value, error, loading } = useAsync(async () => {
-        const response = await fetch('http://localhost:8080/google/everything?q=coronavirus+covid-19')
+        const response = await fetch('http://localhost:8080/reddit/subredditHot?subreddits=coronavirus,covid19&limit=5');
         const result = await response.json();
         return result;
     });
@@ -17,17 +16,19 @@ function GoogleNewsfeed() {
         if(loading || !value) {
             return <LoadingSpinner/>
         }
+
         if(error) {
             console.log(error);
         }
-        return <ListItems items={value} ItemComponent={GoogleNewsItem}/>
+
+        return <ListItems items={value} ItemComponent={RedditPostItem}/>
     }
 
     return (
-        <NewsfeedPanel panelTitle={"Top Headlines"} source={"google"}>
+        <NewsfeedPanel panelTitle={"Reddit Hot Posts"} source={"reddit"}>
             { renderBody() }
         </NewsfeedPanel>
     );
 }
 
-export { GoogleNewsfeed }
+export { RedditFeed };

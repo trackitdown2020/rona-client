@@ -11,6 +11,8 @@ import { useStyles } from '../styles';
 //     subreddit_name_prefixed: "r/Coronavirus",
 //     permalink: "/r/Coronavirus/comments/gmixss/chloroquine_is_a_potent_inhibitor_of_sars/"
 // }
+
+
 function PrimaryText(props) {
     const { title } = props;
     const classes = useStyles();
@@ -59,7 +61,7 @@ function RedditPostItem(props) {
         <ListItem alignItems="flex-start" button onClick={handleOnClick}>
             <ListItemText
                 primary={<PrimaryText title={title}/>}
-                secondary={<SecondaryText  ups={ups} subreddit_name_prefixed={subreddit_name_prefixed}/>}
+                secondary={<SecondaryText ups={ups} subreddit_name_prefixed={subreddit_name_prefixed}/>}
             />
         </ListItem>
     )

@@ -23,7 +23,7 @@ function TwitterFeed() {
     }
 
     return (
-        <NewsfeedPanel panelTitle={"Twitter Popular Tweets"}>
+        <NewsfeedPanel panelTitle={"Twitter Popular Tweets"} source={"twitter"}>
             { renderBody() }
         </NewsfeedPanel>
     );

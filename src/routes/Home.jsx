@@ -4,6 +4,7 @@ import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
 import { GoogleNewsfeed } from '../features/google-newsfeed';
 import { TwitterFeed } from '../features/twitter-feed';
+import { RedditFeed } from '../features/reddit-feed';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +53,7 @@ function Home() {
           >
           <GoogleNewsfeed/>
           <TwitterFeed/>
+          <RedditFeed/>
         </Grid>
       </div>
     
