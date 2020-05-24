@@ -4,6 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { DashboardBase } from '../features/dashboard-base'
 import { VerticalTabs } from '../components/VerticalTabs';
+import { MobilityGraph } from '../features/mobility-graph';
 
 const tabs = [
     {
@@ -19,8 +20,8 @@ const tabs = [
       component: () => <h1> Heat Map </h1>,
     },
     {
-      label: "Chart 1",
-      component: () => <h1> Chart 1 </h1>,
+      label: "Mobility",
+      component: () => <MobilityGraph/>,
     },
 ];
 
