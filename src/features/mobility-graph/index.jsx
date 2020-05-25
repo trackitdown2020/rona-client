@@ -5,6 +5,7 @@ import { LineGraph } from '../../components/LineGraph';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 const typeSelection = [
     {
@@ -39,8 +40,8 @@ const typeSelection = [
 
 const useStyles = makeStyles((theme) => ({
   chipsContainer: {
-      width: '80%',
-      margin: 24
+      marginTop: 24,
+      width: '60%',
   }
 }));
 
@@ -50,43 +51,40 @@ function MobilityGraph() {
     const [types, setTypes] = useState([]);
     
     const handleOnClick = ({ id, selected }) => {
-        const newTypesList = [...types];
-        if(selected) {
-            newTypesList.push(id);
+        if(id === 'all') {
+            setTypes(['all']);
+            return;
         } else {
-            let index = newTypesList.findIndex(value => value === id);
-            console.log(index);
-            newTypesList.splice(index, 1);
+            let newTypesList;
+            if(types.includes('all')) {
+                newTypesList = [];
+            } else {
+                newTypesList= [...types];
+            }
+            if(selected) {
+                if(!newTypesList.includes(id)) {
+                    newTypesList.push(id);
+                }
+            } else {
+                let index = newTypesList.findIndex(value => value === id);
+                console.log(index);
+                newTypesList.splice(index, 1);
+            }
+            setTypes(newTypesList);
         }
-        setTypes(newTypesList);
     }
 
     const { response, error, loading } = useFetchMobility('US', '', types);
 
-    // const hTicks = [];
-    // if(response) {
-    //     response.forEach((value, index) => { 
-    //         if(index % 5 === 0 && value[0] !== 'Date') {
-    //             hTicks.push(value[0]);
-    //         }
-    //     });
-    // }
-    // console.log(hTicks);
-
-
+    console.log(typeSelection, types);
     return (
         <>
-            <Typography variant="h3" gutterBottom>
-                Mobility of the US
-            </Typography>
             <LineGraph
-                width={'1500px'}
+                width={'1300px'}
                 height={'500px'}
                 data={response}
                 hAxis={{title: 'Date', gridlines: { count: 5 }}}
                 vAxis={{title: 'Percentage', format: 'percent', baseline: 0, baselineColor: 'black'}}
-                title={'Mobility'}
-                subtitle={'test'}
             />
             <Grid
                 container
@@ -96,7 +94,12 @@ function MobilityGraph() {
                 className={classes.chipsContainer}
             >
                 {
-                    typeSelection.map(({id, label}) => (<Chip id={id} label={label} onClick={handleOnClick}/>))
+                    typeSelection.map(({id, label}) => 
+                        (<Chip id={id}
+                            label={label}
+                            clicked={types.includes(id)}
+                            onClick={handleOnClick}
+                        />))
                 }
             </Grid>
            

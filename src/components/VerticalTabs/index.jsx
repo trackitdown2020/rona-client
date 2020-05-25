@@ -3,6 +3,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { TabPanel } from "./TabPanel";
 import styles from "./styles.module.css";
+import Typography from '@material-ui/core/Typography';
 
 function a11yProps(index) {
   return {
@@ -35,11 +36,16 @@ function VerticalTabs(props) {
         })}
       </Tabs>
       {tabs.map((tab, index) => {
-        const { label, component } = tab;
+        const { component, title } = tab;
         const Component = component;
         return (
           <TabPanel value={value} index={index}>
-            <Component />
+            <div className={styles.tabContent}>
+                <Typography variant="h3" gutterBottom className={styles.tabTitle}>
+                  { title ? title : ''}
+                </Typography>
+              <Component />
+            </div>
           </TabPanel>
         );
       })}

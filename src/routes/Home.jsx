@@ -21,6 +21,7 @@ const tabs = [
     },
     {
       label: "Mobility",
+      title: "Mobility of people",
       component: () => <MobilityGraph/>,
     },
 ];

@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import MuiChip from '@material-ui/core/Chip';
 
 function Chip(props) {
-    const { onClick, id, label } = props;
-    const [clicked, setClicked] = useState(false);
+    const { onClick, id, label, clicked } = props;
 
+    console.log(clicked)
     const handleOnClick = (e) => {
         onClick({ 
             id,
             selected: !clicked 
         });
-        setClicked(!clicked);
     }
 
     return (
