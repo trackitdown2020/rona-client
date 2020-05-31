@@ -4,19 +4,17 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { DashboardBase } from '../features/dashboard-base'
 import { VerticalTabs } from '../components/VerticalTabs';
+import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
 
 const tabs = [
     {
-      label: "Maps",
-      component: () => (
-        <>
-          <h1> Test </h1>
-        </>
-      ),
-    },
-    {
       label: "Heat Maps",
-      component: () => <h1> Heat Map </h1>,
+      component: () => (
+        <div>
+          <h1> Test </h1>
+          <div style={{width: "1000px", height: "800px"}}><WorldChorolpethMap/></div>
+        </div>
+      ),
     },
     {
       label: "Chart 1",
