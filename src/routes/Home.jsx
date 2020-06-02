@@ -12,7 +12,7 @@ const tabs = [
       component: () => (
         <div>
           <h1> Test </h1>
-          <div style={{width: "1000px", height: "800px"}}><WorldChorolpethMap/></div>
+          <div style={{width: "1200px", height: "800px"}}><WorldChorolpethMap/></div>
         </div>
       ),
     },

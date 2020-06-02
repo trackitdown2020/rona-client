@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { 
-    ComposableMap,
-    Geographies,
-    Geography,
-    Sphere,
-    Graticule
-} from 'react-simple-maps';
 import iso from 'iso-3166-1';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { useAsync } from 'react-use';
+import { ChoroplethMap } from '../../components/Maps/ChoroplethMap';
+import { Geography } from 'react-simple-maps';
+import Tooltip from '@material-ui/core/Tooltip';
+import { ChloroplethTooltip } from '../../components/Tooltip/ChloroplethTooltip';
 
 const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
@@ -24,46 +21,48 @@ function WorldChorolpethMap() {
         return <LoadingSpinner/>
     }
 
-    const { Global } = value;
+    const { Global, Countries } = value;
     const { TotalConfirmed } = Global;
+
     const colorScale = scaleLinear()
-        .domain([0, 1])
+        .domain([0, 25])
         .range(["#ffedea", "#ff5233"]);
 
-  return (
-    <ComposableMap
-      projectionConfig={{
-        rotate: [-10, 0, 0],
-        scale: 147
-      }}
-    >
-      <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-      <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-      {value.Countries && value.Countries.length > 0 && (
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map(geo => {
-                const d = value.Countries.find((s) => {
-                    const countryData = iso.whereAlpha2(s.CountryCode);
-                    return countryData && countryData.alpha3 === geo.properties.ISO_A3;
-                });
-                if(d) {
-                    const colorFill = colorScale(d.TotalConfirmed/TotalConfirmed);
-                    return (
-                        <Geography
-                            key={geo.rsmKey}
-                            geography={geo}
-                            fill={d ?  colorFill : "#F5F4F6"}
-                        />
-                  );
-                }
-              
-            })
-          }
-        </Geographies>
-      )}
-    </ComposableMap>
-  );
+    const geoMapFn = (geo) => {
+        const country = Countries.find((s) => {
+            const countryCodes = iso.whereAlpha2(s.CountryCode);
+            const countryIso3 = countryCodes && countryCodes.alpha3;
+            return countryIso3 === geo.properties.ISO_A3;
+        });
+        if(country) {
+            const { 
+                TotalConfirmed:CountryTotalConfirmed,
+                Country
+            } = country;
+            const colorFill = colorScale(CountryTotalConfirmed/TotalConfirmed * 100);
+            return (
+                <ChloroplethTooltip
+                    country={Country}
+                    totalConfirmed={CountryTotalConfirmed}
+                >
+                    <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        fill={country ? colorFill : "#F5F4F6"}
+                        stroke={"#D3D3D3"}
+                    />
+                </ChloroplethTooltip>
+            );
+        }
+    }
+
+    return (
+        <ChoroplethMap
+            geoUrl={geoUrl}
+            data={Countries}
+            geoMapFn={geoMapFn}
+        />
+    );
 }
 
 export { WorldChorolpethMap };
