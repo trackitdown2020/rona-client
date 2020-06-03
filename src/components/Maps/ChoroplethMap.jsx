@@ -15,6 +15,7 @@ function ChoroplethMap(props) {
 
     return (
         <ComposableMap
+            data-tip={""}
             projectionConfig={{
                 scale: 170
             }}

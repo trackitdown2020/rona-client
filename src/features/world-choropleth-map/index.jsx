@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { scaleLinear } from 'd3-scale';
 import iso from 'iso-3166-1';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
@@ -7,10 +7,12 @@ import { ChoroplethMap } from '../../components/Maps/ChoroplethMap';
 import { Geography } from 'react-simple-maps';
 import Tooltip from '@material-ui/core/Tooltip';
 import { ChloroplethTooltip } from '../../components/Tooltip/ChloroplethTooltip';
+import ReactTooltip from 'react-tooltip';
 
 const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
 function WorldChorolpethMap() {
+    const [content, setTooltipContent] = useState('');
     const { value, error, loading } = useAsync(async () => {
         const response = await fetch('http://localhost:8080/covid19/summary')
         const result = await response.json();
@@ -41,27 +43,32 @@ function WorldChorolpethMap() {
             } = country;
             const colorFill = colorScale(CountryTotalConfirmed/TotalConfirmed * 100);
             return (
-                <ChloroplethTooltip
-                    country={Country}
-                    totalConfirmed={CountryTotalConfirmed}
-                >
-                    <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={country ? colorFill : "#F5F4F6"}
-                        stroke={"#D3D3D3"}
-                    />
-                </ChloroplethTooltip>
+                <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={country ? colorFill : "#F5F4F6"}
+                    stroke={"#D3D3D3"}
+                    onMouseEnter={() => {
+                        setTooltipContent(`${Country} - ${CountryTotalConfirmed} cases`);
+                    }}
+                    onMouseLeave={() => {
+                        setTooltipContent('');
+                    }}
+                />
             );
         }
     }
+    console.log(content)
 
     return (
-        <ChoroplethMap
-            geoUrl={geoUrl}
-            data={Countries}
-            geoMapFn={geoMapFn}
-        />
+        <>
+            <ReactTooltip>{content}</ReactTooltip>
+            <ChoroplethMap
+                geoUrl={geoUrl}
+                data={Countries}
+                geoMapFn={geoMapFn}
+            />
+        </>
     );
 }
 
