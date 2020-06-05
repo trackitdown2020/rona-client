@@ -10,7 +10,9 @@
     "@mdi/react": "^1.4.0",
     "clsx": "^1.1.0",
     "leaflet": "^1.6.0",
+    "material-table": "^1.59.0",
     "moment": "^2.25.3",
+    "object-path": "^0.11.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
@@ -18,6 +20,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-use": "^15.1.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"

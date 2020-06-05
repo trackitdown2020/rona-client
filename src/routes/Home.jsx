@@ -1,7 +1,4 @@
 import React from 'react';
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
 import { DashboardBase } from '../features/dashboard-base'
 import { VerticalTabs } from '../components/VerticalTabs';
 
