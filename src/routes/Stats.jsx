@@ -5,7 +5,7 @@ import { WorldStatsCards } from '../features/world-stats-cards';
 
 const renderContent = () => (
     <>
-        {/* <WorldStatsCards/> */}
+        <WorldStatsCards/>
         <WorldTable/>
     </>
 );

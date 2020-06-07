@@ -2,18 +2,23 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import Grid from '@material-ui/core/Grid';
 import { StatsDisplayCard } from '../../components/StatsDisplayCard';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 function WorldStatsCards() {
     const { value, loading, error } = useAsync(async () => {
-        const response = fetch('http://localhost:8080/covid19/globalSummary')
+        const response = fetch('http://localhost:8080/covid19/globalSummary');
+        const result = await (await response).json();
+        return result;
     });
 
+    if(loading || !value) {
+        return <LoadingSpinner/>
+    }
+
     const { 
-        Global: {
-            TotalConfirmed,
-            TotalDeaths,
-            TotalRecovered
-        }
+        TotalConfirmed,
+        TotalDeaths,
+        TotalRecovered
     } = value;
 
     return (
