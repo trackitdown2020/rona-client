@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
       width: 400,
-      padding: 24,
+      padding: 16,
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -16,5 +16,5 @@ export const useStyles = makeStyles((theme) => ({
     },
     header: {
         backgroundColor: "#c0deed"
-    }
+    },
 }));
