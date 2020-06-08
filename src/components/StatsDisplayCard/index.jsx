@@ -7,21 +7,28 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+        width: 275,
+    },
+    content: {
+        textAlign: 'center',
+    },
+    values: {
+        color: 'red'
     }
+
 });
 
 function StatsDisplayCard({title, value}) {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
-            <CardContent>
-                <Typography variant="h4" gutterBottom>
+            <CardContent className={classes.content}>
+                <Typography variant="h5">
                     { title }
                 </Typography>
                 <Divider />
-                <Typography variant="h4" gutterBottom color="textSecondary">
-                    { value }
+                <Typography variant="h4" color="textSecondary" className={classes.values}>
+                    { value.toLocaleString() }
                 </Typography>
             </CardContent>
         </Card>

@@ -3,6 +3,12 @@ import MaterialTable from 'material-table';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { useAsync } from 'react-use';
 import { percentageFormatter } from './formatters';
+import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 function WorldTable() {
     const { value, error, loading } = useAsync(async () => {
@@ -25,39 +31,28 @@ function WorldTable() {
 
     return (
         <MaterialTable
-            title={'Worldwide Covid-19 Stats'}
+            title={'Worldwide COVID-19 Stats'}
             columns={columns}
             data={value}
+            options={{
+                headerStyle: {
+                    backgroundColor: '#3f51b5',
+                    color: '#FFFF'
+                },
+                search: true,
+                pageSize: 10
+            }}
+            icons={{
+                Search: SearchIcon,
+                ResetSearch: ClearIcon,
+                FirstPage: FirstPageIcon,
+                LastPage: LastPageIcon,
+                NextPage: ChevronRightIcon,
+                PreviousPage: ChevronLeftIcon
+            }}
         />
     )
 
 }
 
 export { WorldTable };
-
-// {
-//     "coordinates": {
-//         "latitude": 33,
-//         "longitude": 65
-//     },
-//     "name": "Afghanistan",
-//     "code": "AF",
-//     "population": 29121286,
-//     "updated_at": "2020-06-04T06:27:27.328Z",
-//     "today": {
-//         "deaths": 5,
-//         "confirmed": 624
-//     },
-//     "most_recent": {
-//         "deaths": 299,
-//         "confirmed": 17891,
-//         "recovered": 1541,
-//         "critical": 16051
-//     },
-//     "calculated": {
-//         "death_rate": 1.6712313453691798,
-//         "recovery_rate": 8.613269241518081,
-//         "recovered_vs_death_ratio": null,
-//         "cases_per_million_population": 19
-//     }
-// }
