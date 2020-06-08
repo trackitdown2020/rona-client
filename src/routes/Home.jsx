@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme) => ({
     container: {
       width: 450,
-
     },
 }));
 
@@ -56,7 +55,6 @@ function Home() {
           <RedditFeed/>
         </Grid>
       </div>
-    
     )
   }
 
