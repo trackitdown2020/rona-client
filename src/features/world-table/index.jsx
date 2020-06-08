@@ -9,6 +9,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 function WorldTable() {
     const { value, error, loading } = useAsync(async () => {
@@ -19,9 +20,9 @@ function WorldTable() {
 
     const columns = [
         { title: 'Country', field: 'name' },
-        { title: 'Confirmed', field: 'most_recent.confirmed' },
-        { title: 'Recovered', field: 'most_recent.recovered' },
-        { title: 'Deaths', field: 'most_recent.deaths' },
+        { title: 'Confirmed', field: 'most_recent.confirmed', render: rowData => rowData.most_recent.confirmed.toLocaleString() },
+        { title: 'Recovered', field: 'most_recent.recovered', render: rowData => rowData.most_recent.recovered.toLocaleString() },
+        { title: 'Deaths', field: 'most_recent.deaths', render: rowData => rowData.most_recent.deaths.toLocaleString() },
         { title: 'Death Rate', field: 'calculated.death_rate', render: rowData => percentageFormatter(rowData, 'calculated.death_rate') }
     ];
 
@@ -48,7 +49,8 @@ function WorldTable() {
                 FirstPage: FirstPageIcon,
                 LastPage: LastPageIcon,
                 NextPage: ChevronRightIcon,
-                PreviousPage: ChevronLeftIcon
+                PreviousPage: ChevronLeftIcon,
+                SortArrow: ArrowUpwardIcon
             }}
         />
     )
