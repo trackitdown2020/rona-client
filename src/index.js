@@ -9,8 +9,8 @@ ReactDOM.render(
   <Provider>
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={Layout} />
-        {/* <Route path={'/track'} component={TrackDashboad} /> */}
+        <Route exact path="/" component={Layout} />
+        <Route path="/stats" component={}/>
       </Switch>
     </BrowserRouter>
   </Provider>,

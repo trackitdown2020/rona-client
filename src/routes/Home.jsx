@@ -1,11 +1,8 @@
 import React from 'react';
-import { DashboardBase } from '../features/dashboard-base'
+import { Layout } from '../components/Layout';
 import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
-import { GoogleNewsfeed } from '../features/google-newsfeed';
-import { TwitterFeed } from '../features/twitter-feed';
-import { RedditFeed } from '../features/reddit-feed';
-import Grid from '@material-ui/core/Grid';
+import { Newsfeed } from '../features/newsfeed';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -41,28 +38,12 @@ const renderVerticalTabs = () => {
 function Home() {
   const classes = useStyles();
 
-  const renderNewsfeed = () => {
-    return (
-      <div className={classes.container}>
-          <Grid
-            container
-            direction="column"
-            justify="space-between"
-            alignItems="center"
-          >
-          <GoogleNewsfeed/>
-          <TwitterFeed/>
-          <RedditFeed/>
-        </Grid>
-      </div>
-    )
-  }
-
   return (
-      <DashboardBase
-          renderContent={renderVerticalTabs}
-          renderToolbar={renderNewsfeed}
-      />
+      <Layout
+        renderToolbar={renderNewsfeed}
+      >
+        { renderVerticalTabs() }
+      </Layout>
   );
 }
 
