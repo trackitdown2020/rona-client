@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router';
 import { Layout } from 'components/Layout';
-import { Provider } from 'state/useAppState';
+import { Provider } from 'state/AppStateProvider';
 
 ReactDOM.render(
   <Provider>

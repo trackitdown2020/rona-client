@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { VerticalTabs } from 'components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
+import Chart1 from '../Chart1';
 
 const drawerWidth = 450;
 
@@ -38,7 +39,7 @@ export function View({ classes1 = {}, title, children, renderToolbar }) {
   const tabs = [
     { label: 'Maps', content: <h1>Test</h1> },
     { label: 'Heat Maps', content: <h1>Heat Map</h1> },
-    { label: 'Chart 1', content: <h1>Chart 1</h1> },
+    { label: 'Chart 1', content: <Chart1 /> },
   ];
 
   return (
