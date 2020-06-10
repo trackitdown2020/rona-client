@@ -1,7 +1,7 @@
 import React from 'react';
-import { GoogleNewsfeed } from './google-newsfeed';
-import { TwitterFeed } from './features/twitter-feed';
-import { RedditFeed } from './features/reddit-feed';
+import { GoogleNewsfeed } from '../google-newsfeed';
+import { TwitterFeed } from '../twitter-feed';
+import { RedditFeed } from '../reddit-feed';
 import Grid from '@material-ui/core/Grid';
 
 function Newsfeed() {

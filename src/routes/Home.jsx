@@ -35,6 +35,8 @@ const renderVerticalTabs = () => {
     )
 }
 
+const renderNewsfeed = () => <Newsfeed/>
+
 function Home() {
   const classes = useStyles();
 
