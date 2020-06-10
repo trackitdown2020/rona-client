@@ -7,7 +7,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import { View } from './view';
+import { Layout } from '.';
 import { useStyles } from './styles';
 
 const renderList = () => (
@@ -42,7 +42,7 @@ export function Example() {
   const classes = useStyles();
 
   return (
-    <View title="Example" renderToolbar={renderList} classes={classes}>
+    <Layout title="Example" renderToolbar={renderList} classes={classes}>
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
@@ -71,6 +71,6 @@ export function Example() {
         maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
         aliquam ultrices sagittis orci a.
       </Typography>
-    </View>
+    </Layout>
   );
 }
