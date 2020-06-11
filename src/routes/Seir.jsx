@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from '../components/Layout';
-import { SEIRGraph } from '../features/seir-graph'
+import { SEIRGraph } from '../features/seir-graph';
 import { makeStyles } from '@material-ui/core/styles';
 
 // const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,9 @@ function Seir() {
     const renderContent = () => (
         <>
             <h1>SEIR GRAPH</h1>
-            <SEIRGraph />
+            <div style={{height: '500px'}}>
+                <SEIRGraph />
+            </div>
         </>
     );
 

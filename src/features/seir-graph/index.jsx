@@ -278,7 +278,8 @@ function SEIRGraph() {
                 }
             ]
         }
-    ]
+    ];
+    
     return (
         <ResponsiveLine
             data={data}
