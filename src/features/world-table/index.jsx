@@ -10,8 +10,10 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import useAppState from '../../state/AppStateProvider';
 
 function WorldTable() {
+    const { setSelectedCountry } = useAppState();
     const { value, error, loading } = useAsync(async () => {
         const response = await fetch('http://localhost:8080/covid19/summaryOfAllCountries');
         const result = await response.json();
@@ -25,6 +27,11 @@ function WorldTable() {
         { title: 'Deaths', field: 'most_recent.deaths', render: rowData => rowData.most_recent.deaths.toLocaleString() },
         { title: 'Death Rate', field: 'calculated.death_rate', render: rowData => percentageFormatter(rowData, 'calculated.death_rate') }
     ];
+
+    const handleOnRowClick = (event, rowData) => {
+        const { name, code } = rowData;
+        setSelectedCountry({name, code});
+    }
 
     if(loading || !value) {
         return <LoadingSpinner/>
@@ -52,6 +59,7 @@ function WorldTable() {
                 PreviousPage: ChevronLeftIcon,
                 SortArrow: ArrowUpwardIcon
             }}
+            onRowClick={handleOnRowClick}
         />
     )
 

@@ -3,6 +3,6 @@ import { View } from './view';
 import useAppState from 'state/AppStateProvider';
 
 export default () => {
-  const { selectedCountry, selectedCountrySet } = useAppState();
+  const { selectedCountry, setSelectedCountry } = useAppState();
   return <View selectedCountry={selectedCountry} />;
 };
