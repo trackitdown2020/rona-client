@@ -1,10 +1,12 @@
 import React from 'react';
 import { Layout } from '../components/Layout';
 import { WorldTable } from '../features/world-table';
+import { CountryTable } from '../features/country-table';
 import { WorldStatsCards } from '../features/world-stats-cards';
 import { makeStyles } from '@material-ui/core/styles';
 import { Newsfeed } from '../features/newsfeed';
 import useAppState from '../state/AppStateProvider';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -16,12 +18,18 @@ function Stats() {
     const { selectedCountry } = useAppState();
     const classes = useStyles();
 
-    const renderContent = () => (
+    const renderWorldContent = () => (
         <>
             <WorldStatsCards/>
             <WorldTable/>
         </>
     );
+
+    const renderCountryContent = () => (
+      <>
+        <CountryTable/>
+      </>
+    )
 
     const { name } = selectedCountry;
 
@@ -30,7 +38,7 @@ function Stats() {
           title={name ? name : 'Worldwide COVID-19 Statistics'}
           renderToolbar={ () => <Newsfeed/> }
         >
-          { renderContent() }
+          { _.isEmpty(selectedCountry) ? renderWorldContent() : renderCountryContent() }
         </Layout>
     )
 }
