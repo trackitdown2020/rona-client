@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import { StatsDisplayCard } from '../../components/StatsDisplayCard';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { makeStyles } from '@material-ui/core/styles';
+import useAppState from '../../state/AppStateProvider';
+import countries from 'i18n-iso-countries';
 
 export const useStyles = makeStyles(theme => ({
     root: {
@@ -11,10 +13,13 @@ export const useStyles = makeStyles(theme => ({
     },
 }));
 
-function WorldStatsCards() {
+function CountryStatsCard() {
+    const { selectedCountry } = useAppState();
+    const { code } = selectedCountry;
     const classes = useStyles();
     const { value, loading, error } = useAsync(async () => {
-        const response = await fetch('http://localhost:8080/covid19/globalSummary');
+        const isoCode = countries.alpha2ToAlpha3(code);
+        const response = await fetch(`http://localhost:8080/covid19/countryReport?iso=${isoCode}`);
         const result = await response.json();
         return result;
     });
@@ -25,15 +30,15 @@ function WorldStatsCards() {
         }
 
         const { 
-            TotalConfirmed,
-            TotalDeaths,
-            TotalRecovered
+            confirmed,
+            recovered,
+            deaths
         } = value;
         return (
             <>
-                <StatsDisplayCard title={'TOTAL CONFIRMED'} value={TotalConfirmed}/>
-                <StatsDisplayCard title={'TOTAL DEATHS'} value={TotalDeaths}/>
-                <StatsDisplayCard title={'TOTAL RECOVERED'} value={TotalRecovered}/>
+                <StatsDisplayCard title={'TOTAL CONFIRMED'} value={confirmed}/>
+                <StatsDisplayCard title={'TOTAL DEATHS'} value={deaths}/>
+                <StatsDisplayCard title={'TOTAL RECOVERED'} value={recovered}/>
             </>
         );
     }
@@ -51,4 +56,4 @@ function WorldStatsCards() {
     )
 }
 
-export { WorldStatsCards };
+export { CountryStatsCard };
