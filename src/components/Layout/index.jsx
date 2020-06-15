@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { VerticalTabs } from 'components/VerticalTabs';
+import { Breadcrumbs } from '../Breadcrumbs';
 import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 450;
@@ -50,6 +50,7 @@ export function Layout({ title, children, renderToolbar }) {
         <div className={classes.content}>
           { children }
         </div>
+        <Breadcrumbs/>
       </main>
       <Drawer
         className={classes.drawer}
