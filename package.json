@@ -9,10 +9,13 @@
     "@mdi/js": "^5.1.45",
     "@mdi/react": "^1.4.0",
     "clsx": "^1.1.0",
+    "husky": "^4.2.5",
     "leaflet": "^1.6.0",
     "material-table": "^1.59.0",
     "moment": "^2.25.3",
     "object-path": "^0.11.4",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
@@ -37,7 +40,13 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "format:scripts": "pretty-quick --staged --pattern 'src/**/*.js?'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format:scripts && git ls-files --modified | xargs git add"
+    }
   },
   "browserslist": {
     "production": [
