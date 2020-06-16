@@ -2,7 +2,7 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
-import { ListItems } from '../../components/ListItems';
+import { RotatingListItems } from '../../components/RotatingListItems';
 import { GoogleNewsItem } from '../../components/ListItems/components'
 
 
@@ -20,7 +20,7 @@ function GoogleNewsfeed() {
         if(error) {
             console.log(error);
         }
-        return <ListItems items={value} ItemComponent={GoogleNewsItem}/>
+        return <RotatingListItems items={value} ItemComponent={GoogleNewsItem}/>
     }
 
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
-import { ListItems } from '../../components/ListItems';
+import { RotatingListItems } from '../../components/RotatingListItems';
 import { RedditPostItem } from '../../components/ListItems/components';
 
 function RedditFeed() {
@@ -21,7 +21,7 @@ function RedditFeed() {
             console.log(error);
         }
 
-        return <ListItems items={value} ItemComponent={RedditPostItem}/>
+        return <RotatingListItems items={value} ItemComponent={RedditPostItem}/>
     }
 
     return (
