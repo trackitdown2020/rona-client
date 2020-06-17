@@ -2,7 +2,7 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
-import { ListItems } from '../../components/ListItems';
+import { RotatingListItems } from '../../components/RotatingListItems';
 import { TwitterItem } from '../../components/ListItems/components';
 
 function TwitterFeed() {
@@ -19,7 +19,7 @@ function TwitterFeed() {
         if(error) {
             console.log(error);
         }
-        return <ListItems items={value} ItemComponent={TwitterItem}/>
+        return <RotatingListItems items={value} ItemComponent={TwitterItem} interval={3000}/>
     }
 
     return (
