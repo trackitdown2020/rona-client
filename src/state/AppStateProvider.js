@@ -1,16 +1,16 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AppContext } from './AppContext';
 
-const Context = createContext();
 
-export const Provider = ({ children }) => {
-  const [selectedCountry, selectedCountrySet] = useState('USA');
+export const AppStateProvider = ({ children }) => {
+  const [selectedCountry, setSelectedCountry] = useState({});
 
   const appState = {
     selectedCountry,
-    selectedCountrySet,
+    setSelectedCountry,
   };
 
-  return <Context.Provider value={appState} children={children} />;
+  return <AppContext.Provider value={appState} children={children} />;
 };
 
-export default () => useContext(Context);
+export default () => useContext(AppContext);
