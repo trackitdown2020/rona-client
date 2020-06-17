@@ -24,8 +24,9 @@ const tabs = [
       component: () => <h1> Heat Map </h1>,
     },
     {
-      label: "Chart 1",
-      component: () => <h1> Chart 1 </h1>,
+      label: "Mobility",
+      title: "Mobility of people",
+      component: () => <MobilityGraph/>,
     },
 ];
 
