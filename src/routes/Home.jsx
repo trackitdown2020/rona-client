@@ -1,10 +1,14 @@
 import React from 'react';
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import { DashboardBase } from '../features/dashboard-base'
+import { Layout } from '../components/Layout';
 import { VerticalTabs } from '../components/VerticalTabs';
-import { MobilityGraph } from '../features/mobility-graph';
+import { makeStyles } from '@material-ui/core/styles';
+import { Newsfeed } from '../features/newsfeed';
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+      width: 450,
+    },
+}));
 
 const tabs = [
     {
@@ -32,13 +36,18 @@ const renderVerticalTabs = () => {
     )
 }
 
+const renderNewsfeed = () => <Newsfeed/>
 
 function Home() {
-    return (
-        <DashboardBase
-            renderContent={renderVerticalTabs}
-        />
-    );
+  const classes = useStyles();
+
+  return (
+      <Layout
+        renderToolbar={renderNewsfeed}
+      >
+        { renderVerticalTabs() }
+      </Layout>
+  );
 }
 
 export { Home };

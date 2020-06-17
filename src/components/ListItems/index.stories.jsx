@@ -1,6 +1,7 @@
 import React from 'react';
-import {  TwitterItem } from './components/TwitterItem';
+import { TwitterItem } from './components/TwitterItem';
 import { GoogleNewsItem } from './components/GoogleNewsItem';
+import { RedditPostItem } from './components/RedditPostItem';
 import Paper from '@material-ui/core/Paper';
 
 export default { title: 'List Items' };
@@ -42,4 +43,21 @@ export const TwitterListItem = () => {
             </Paper>
         </div>
     );
+}
+
+export const RedditListItem = () => {
+    const example = {
+        url: "https://virologyj.biomedcentral.com/articles/10.1186/1743-422X-2-69",
+        title: "Chloroquine is a potent inhibitor of SARS coronavirus infection and spread | Virology Journal",
+        ups: 2,
+        subreddit_name_prefixed: "r/Coronavirus",
+        permalink: "/r/Coronavirus/comments/gmixss/chloroquine_is_a_potent_inhibitor_of_sars/"
+    }
+    return (
+        <div style={{width: "400px"}}>
+            <Paper elevation={3}>
+                <RedditPostItem {...example}/>
+            </Paper>
+        </div>
+    )
 }
