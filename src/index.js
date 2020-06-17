@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router';
-import { Home, Stats } from './routes';
+import { Home, Stats, Mobility } from './routes';
 import { AppStateProvider } from 'state/AppStateProvider';
 
 ReactDOM.render(
@@ -11,6 +11,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/stats" component={Stats}/>
+        <Route path="/mobility" component={Mobility}/>
       </Switch>
     </BrowserRouter>
   </AppStateProvider>,
