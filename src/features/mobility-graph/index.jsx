@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
-import { Line } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
+import _ from 'lodash';
 
 const typeSelection = [
   {
@@ -64,40 +65,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const properties = {
-  width: 1200,
+  width: 1400,
   height: 600,
-  margin: { top: 20, right: 20, bottom: 60, left: 80 },
+  margin: { top: 50, right: 200, bottom: 50, left: 80 },
   animate: true,
   enableSlices: 'x'
+};
+
+const idMap = {
+  'Retail and Recreation': 'retail-and-recreation',
+  'Grocery and Pharmacy': 'grocery-and-pharmacy',
+  Parks: 'parks',
+  'Transit Stations': 'transit-stations',
+  Workplaces: 'workplaces',
+  Residential: 'residential'
 };
 
 function MobilityGraph() {
   const classes = useStyles();
   const [types, setTypes] = useState([]);
 
-  const handleOnClick = ({ id, selected }) => {
-    if (id === 'all') {
-      setTypes(['all']);
-      return;
-    } else {
-      let newTypesList;
-      if (types.includes('all')) {
-        newTypesList = [];
-      } else {
-        newTypesList = [...types];
-      }
-      if (selected) {
-        if (!newTypesList.includes(id)) {
-          newTypesList.push(id);
-        }
-      } else {
-        let index = newTypesList.findIndex((value) => value === id);
-        console.log(index);
-        newTypesList.splice(index, 1);
-      }
-      setTypes(newTypesList);
-    }
-  };
+  //   const onToggle = (d) => {
+  //       const { id } = d;
+  //       const actualId = idMap[id];
+  //       const copyTypes = [...types];
+  //       if(copyTypes.includes(actualId)) {
+  //         _.remove(copyTypes, id => id === actualId);
+  //       } else {
+  //           copyTypes.push(actualId);
+  //       }
+  //       setTypes(copyTypes);
+  //   }
 
   const { response, error, loading } = useFetchMobility('US', '', types);
 
@@ -106,8 +104,8 @@ function MobilityGraph() {
   }
 
   return (
-    <div style={{ height: '1000px' }}>
-      <Line
+    <div style={{ height: '1400px' }}>
+      <ResponsiveLine
         {...properties}
         data={response}
         xScale={{
@@ -120,47 +118,49 @@ function MobilityGraph() {
         yScale={{
           type: 'linear',
           stacked: false,
-          min: -1,
-          max: 1
+          min: -100,
+          max: 100
         }}
         axisLeft={{
           legend: 'linear scale',
-          legendOffset: 12
+          legendOffset: 12,
+          legend: 'Percentage of Mobility (%)',
+          legendPosition: 'middle',
+          legendOffset: -60,
+          format: (value) => `${value}%`
         }}
         axisBottom={{
           format: '%b %d',
-          tickValues: 'every 2 days',
-          legend: 'time scale',
-          legendOffset: -12
+          tickValues: 'every 5 days',
+          legend: 'Date',
+          legendOffset: -12,
+          legendPosition: 'middle',
+          orient: 'bottom',
+          legendOffset: 36
         }}
-        pointSize={8}
         curve={'linear'}
+        enablePoints={false}
         enablePointLabel={false}
-        pointSize={16}
-        pointBorderWidth={1}
-        pointBorderColor={{
-          from: 'color',
-          modifiers: [['darker', 0.3]]
-        }}
-        useMesh={true}
-        enableSlices={false}
+        enableGridX={false}
+        enableSlices={'x'}
+        legends={[
+          {
+            anchor: 'right',
+            direction: 'column',
+            justify: false,
+            translateX: 100,
+            translateY: 0,
+            itemsSpacing: 0,
+            itemDirection: 'left-to-right',
+            itemWidth: 60,
+            itemHeight: 60,
+            itemOpacity: 0.75,
+            symbolSize: 10,
+            symbolShape: 'circle',
+            symbolBorderColor: 'rgba(0, 0, 0, .5)'
+          }
+        ]}
       />
-      {/* <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-                className={classes.chipsContainer}
-            >
-                {
-                    typeSelection.map(({id, label}) => 
-                        (<Chip id={id}
-                            label={label}
-                            clicked={types.includes(id)}
-                            onClick={handleOnClick}
-                        />))
-                }
-            </Grid> */}
     </div>
   );
 }
