@@ -13,14 +13,21 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import { preventDefault } from '../../lib/utils/links';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   chipsContainer: {
-    marginTop: 24,
+    marginTop: 10,
+    marginBottom: 16,
     width: '60%'
   },
-  graphContainer: {
+  graph: {
     height: 600
+  },
+  root: {
+    maxWidth: 1400,
+    margin: '5%'
   }
 }));
 
@@ -59,14 +66,32 @@ function MobilityGraph() {
       : value;
 
   return (
-    <>
-      <div className={classes.graphContainer}>
-        <Graph data={data} />
-      </div>
-      <div className={classes.chipsContainer}>
-        <ChipSelectors onClick={onToggle} />
-      </div>
-    </>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia className={classes.graph}>
+          <Graph data={data} />
+        </CardMedia>
+      </CardActionArea>
+      <CardContent>
+        <div className={classes.chipsContainer}>
+          <ChipSelectors onClick={onToggle} />
+        </div>
+        <Typography gutterBottom variant="h5" component="h2">
+          Mobility in US
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          The data is scraped from{' '}
+          <Link
+            href="https://www.google.com/covid19/mobility/"
+            onClick={preventDefault}
+          >
+            Google Mobility Reports
+          </Link>{' '}
+          and is designed to evaluate the overall percentage changes of people
+          movement. [INSERT MORE COMMENTS]
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 
