@@ -1,112 +1,98 @@
-import React, { useState } from 'react';
-import { useFetchMobility } from '../../lib/hooks/mobilityAPI';
-import { Chip } from '../../components/Chip';
-import { LineGraph } from '../../components/LineGraph';
+import React, { Suspense, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
-
-const typeSelection = [
-    {
-        id: 'parks',
-        label: 'Parks'
-    },
-    {
-        id: 'residential',
-        label: 'Residential' 
-    },
-    {
-        id: 'retail-and-recreation',
-        label: 'Retail and Recreation'
-    },
-    {
-        id: 'transit-stations',
-        label: 'Transit Stations'
-    },
-    {
-        id: 'workplaces',
-        label: 'Workplaces'
-    },
-    {
-        id: 'grocery-and-pharmacy',
-        label: 'Grocery and Pharmacy'
-    },
-    {
-        id: 'all',
-        label: 'All'
-    }
-];
+import _ from 'lodash';
+import { useAsync } from 'react-use';
+import { idMap } from './constants';
+import { Graph } from './Graph';
+import { ChipSelectors } from './ChipSelectors';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import { preventDefault } from '../../lib/utils/links';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   chipsContainer: {
-      marginTop: 24,
-      width: '60%',
+    marginTop: 10,
+    marginBottom: 16,
+    width: '60%'
+  },
+  graph: {
+    height: 600
+  },
+  root: {
+    maxWidth: 1400,
+    margin: '5%'
   }
 }));
 
-
 function MobilityGraph() {
-    const classes = useStyles();
-    const [types, setTypes] = useState([]);
-    
-    const handleOnClick = ({ id, selected }) => {
-        if(id === 'all') {
-            setTypes(['all']);
-            return;
-        } else {
-            let newTypesList;
-            if(types.includes('all')) {
-                newTypesList = [];
-            } else {
-                newTypesList= [...types];
-            }
-            if(selected) {
-                if(!newTypesList.includes(id)) {
-                    newTypesList.push(id);
-                }
-            } else {
-                let index = newTypesList.findIndex(value => value === id);
-                console.log(index);
-                newTypesList.splice(index, 1);
-            }
-            setTypes(newTypesList);
-        }
+  const classes = useStyles();
+  const [locations, setLocations] = useState([]);
+  const { value, loading, error } = useAsync(async () => {
+    // Change to url builder
+    const response = await fetch(
+      `http://localhost:8080/covid19/mobility?country=US&type=all`
+    );
+    const result = await response.json();
+    return result;
+  });
+
+  const onToggle = ({ id: selectedId, selected }) => {
+    const copyLocations = [...locations];
+    if (copyLocations.includes(selectedId)) {
+      _.remove(copyLocations, (id) => id === selectedId);
+    } else {
+      copyLocations.push(selectedId);
     }
+    setLocations(copyLocations);
+  };
 
-    const { response, error, loading } = useFetchMobility('US', '', types);
+  if (loading || !value) {
+    return <LoadingSpinner />;
+  }
 
-    console.log(typeSelection, types);
-    return (
-        <>
-            <LineGraph
-                width={'1300px'}
-                height={'500px'}
-                data={response}
-                hAxis={{title: 'Date', gridlines: { count: 5 }}}
-                vAxis={{title: 'Percentage', format: 'percent', baseline: 0, baselineColor: 'black'}}
-            />
-            <Grid
-                container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-                className={classes.chipsContainer}
-            >
-                {
-                    typeSelection.map(({id, label}) => 
-                        (<Chip id={id}
-                            label={label}
-                            clicked={types.includes(id)}
-                            onClick={handleOnClick}
-                        />))
-                }
-            </Grid>
-           
-        </>
-    )
+  const data =
+    locations.length > 0
+      ? value.filter(({ id }) => {
+          console.log(id);
+          return locations.includes(idMap[id]);
+        })
+      : value;
 
-
+  return (
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia className={classes.graph}>
+          <Graph data={data} />
+        </CardMedia>
+      </CardActionArea>
+      <CardContent>
+        <div className={classes.chipsContainer}>
+          <ChipSelectors onClick={onToggle} />
+        </div>
+        <Typography gutterBottom variant="h5" component="h2">
+          Mobility in US
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          The data is scraped from{' '}
+          <Link
+            href="https://www.google.com/covid19/mobility/"
+            onClick={preventDefault}
+          >
+            Google Mobility Reports
+          </Link>{' '}
+          and is designed to evaluate the overall percentage changes of people
+          movement. [INSERT MORE COMMENTS]
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
 
 export { MobilityGraph };
