@@ -11,7 +11,7 @@ function Chip(props) {
     });
     setSelected(!selected);
   };
-  console.log(selected);
+
   return (
     <MuiChip
       id={id}
