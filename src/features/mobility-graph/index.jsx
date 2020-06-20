@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useFetchMobility } from '../../lib/hooks/mobilityAPI';
 import { Chip } from '../../components/Chip';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { ResponsiveLine } from '@nivo/line';
 import _ from 'lodash';
+import { useAsync } from 'react-use';
 
 const typeSelection = [
   {
@@ -32,35 +33,16 @@ const typeSelection = [
   {
     id: 'grocery-and-pharmacy',
     label: 'Grocery and Pharmacy'
-  },
-  {
-    id: 'all',
-    label: 'All'
   }
 ];
-
-const CustomSymbol = ({ size, color, borderWidth, borderColor }) => (
-  <g>
-    <circle
-      fill="#fff"
-      r={size / 2}
-      strokeWidth={borderWidth}
-      stroke={borderColor}
-    />
-    <circle
-      r={size / 5}
-      strokeWidth={borderWidth}
-      stroke={borderColor}
-      fill={color}
-      fillOpacity={0.35}
-    />
-  </g>
-);
 
 const useStyles = makeStyles((theme) => ({
   chipsContainer: {
     marginTop: 24,
     width: '60%'
+  },
+  graphContainer: {
+    height: 600
   }
 }));
 
@@ -83,85 +65,114 @@ const idMap = {
 
 function MobilityGraph() {
   const classes = useStyles();
-  const [types, setTypes] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const { value, loading, error } = useAsync(async () => {
+    // Change to url builder
+    const response = await fetch(
+      `http://localhost:8080/covid19/mobility?country=US&type=all`
+    );
+    const result = await response.json();
+    return result;
+  });
 
-  //   const onToggle = (d) => {
-  //       const { id } = d;
-  //       const actualId = idMap[id];
-  //       const copyTypes = [...types];
-  //       if(copyTypes.includes(actualId)) {
-  //         _.remove(copyTypes, id => id === actualId);
-  //       } else {
-  //           copyTypes.push(actualId);
-  //       }
-  //       setTypes(copyTypes);
-  //   }
+  const onToggle = ({ id: selectedId, selected }) => {
+    const copyLocations = [...locations];
+    if (copyLocations.includes(selectedId)) {
+      _.remove(copyLocations, (id) => id === selectedId);
+    } else {
+      copyLocations.push(selectedId);
+    }
+    setLocations(copyLocations);
+  };
 
-  const { response, error, loading } = useFetchMobility('US', '', types);
-
-  if (loading || !response) {
+  if (loading || !value) {
     return <LoadingSpinner />;
   }
 
+  console.log(locations);
+  const data =
+    locations.length > 0
+      ? value.filter(({ id }) => {
+          console.log(id);
+          return locations.includes(idMap[id]);
+        })
+      : value;
+
   return (
-    <div style={{ height: '1400px' }}>
-      <ResponsiveLine
-        {...properties}
-        data={response}
-        xScale={{
-          type: 'time',
-          format: '%Y-%m-%d',
-          useUTC: false,
-          precision: 'day'
-        }}
-        xFormat="time:%Y-%m-%d"
-        yScale={{
-          type: 'linear',
-          stacked: false,
-          min: -100,
-          max: 100
-        }}
-        axisLeft={{
-          legend: 'linear scale',
-          legendOffset: 12,
-          legend: 'Percentage of Mobility (%)',
-          legendPosition: 'middle',
-          legendOffset: -60,
-          format: (value) => `${value}%`
-        }}
-        axisBottom={{
-          format: '%b %d',
-          tickValues: 'every 5 days',
-          legend: 'Date',
-          legendOffset: -12,
-          legendPosition: 'middle',
-          orient: 'bottom',
-          legendOffset: 36
-        }}
-        curve={'linear'}
-        enablePoints={false}
-        enablePointLabel={false}
-        enableGridX={false}
-        enableSlices={'x'}
-        legends={[
-          {
-            anchor: 'right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 60,
-            itemHeight: 60,
-            itemOpacity: 0.75,
-            symbolSize: 10,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)'
-          }
-        ]}
-      />
-    </div>
+    <>
+      <div className={classes.graphContainer}>
+        <Suspense fallback={<LoadingSpinner />}>
+          <ResponsiveLine
+            {...properties}
+            data={data}
+            xScale={{
+              type: 'time',
+              format: '%Y-%m-%d',
+              useUTC: false,
+              precision: 'day'
+            }}
+            xFormat="time:%Y-%m-%d"
+            yScale={{
+              type: 'linear',
+              stacked: false,
+              min: -100,
+              max: 100
+            }}
+            axisLeft={{
+              legend: 'linear scale',
+              legendOffset: 12,
+              legend: 'Percentage of Mobility (%)',
+              legendPosition: 'middle',
+              legendOffset: -60,
+              format: (value) => `${value}%`
+            }}
+            axisBottom={{
+              format: '%b %d',
+              tickValues: 'every 5 days',
+              legend: 'Date',
+              legendOffset: -12,
+              legendPosition: 'middle',
+              orient: 'bottom',
+              legendOffset: 36
+            }}
+            curve={'linear'}
+            enablePoints={false}
+            enablePointLabel={false}
+            enableGridX={false}
+            enableSlices={'x'}
+            legends={[
+              {
+                anchor: 'right',
+                direction: 'column',
+                justify: false,
+                translateX: 100,
+                translateY: 0,
+                itemsSpacing: 0,
+                itemDirection: 'left-to-right',
+                itemWidth: 60,
+                itemHeight: 60,
+                itemOpacity: 0.75,
+                symbolSize: 10,
+                symbolShape: 'circle',
+                symbolBorderColor: 'rgba(0, 0, 0, .5)'
+              }
+            ]}
+          />
+        </Suspense>
+      </div>
+      <div className={classes.chipsContainer}>
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+        >
+          {typeSelection.map(({ id, label }) => (
+            <Chip id={id} label={label} onClick={onToggle} />
+          ))}
+        </Grid>
+      </div>
+    </>
   );
 }
 
