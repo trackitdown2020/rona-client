@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {
-  selectedCountry,
-  setSelectedCountry
-} from '../../state/AppStateProvider';
+import useAppState from '../../state/AppStateProvider';
 
 function AutocompleteField() {
+  const { selectedCountry, setSelectedCountry } = useAppState();
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
@@ -21,7 +18,7 @@ function AutocompleteField() {
     }
 
     (async () => {
-      const response = await fetch('http://localhost:3000/country/all');
+      const response = await fetch('http://localhost:8080/country/all');
       const countries = await response.json();
 
       if (active) {
@@ -32,7 +29,7 @@ function AutocompleteField() {
     return () => {
       active = false;
     };
-  })();
+  }, [loading]);
 
   useEffect(() => {
     if (!open) {
@@ -68,7 +65,7 @@ function AutocompleteField() {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Asynchronous"
+          label="Country"
           variant="outlined"
           InputProps={{
             ...params.InputProps,

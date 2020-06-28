@@ -10,6 +10,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { SettingsModal } from '../..//features/settings-modal';
+import useAppState from 'state/AppStateProvider';
 
 const drawerWidth = 450;
 
@@ -47,11 +49,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Layout({ title, children, renderToolbar }) {
+  const { handleOpenSettingsModal } = useAppState();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <SettingsModal />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar classes={classes.toolbar}>
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -60,7 +64,7 @@ export function Layout({ title, children, renderToolbar }) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <Button color="inherit">
+          <Button color="inherit" onClick={handleOpenSettingsModal}>
             <SettingsIcon />
           </Button>
         </Toolbar>
