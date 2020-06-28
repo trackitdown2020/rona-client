@@ -5,7 +5,6 @@ import { AppContext } from './AppContext';
 export const AppStateProvider = ({ children }) => {
   const [selectedCountry, setSelectedCountry] = useState({});
   const [openSettingsModal, setOpenSettingsModal] = useState(false);
-
   const handleOpenSettingsModal = () => {
     setOpenSettingsModal(true);
   }
