@@ -5,14 +5,13 @@ import useAppState from '../../state/AppStateProvider';
 
 function SettingsModal() {
   const { openSettingsModal, handleCloseSettingsModal } = useAppState();
-  console.log(openSettingsModal);
 
   return (
     <ModalWrapper
       isOpen={openSettingsModal}
       handleClose={handleCloseSettingsModal}
     >
-      <h1> Test </h1>
+      <h1> Settings </h1>
       <AutocompleteField />
     </ModalWrapper>
   );

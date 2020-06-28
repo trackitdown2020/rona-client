@@ -72,7 +72,7 @@ export function Layout({ title, children, renderToolbar }) {
       <main className={classes.main}>
         <Toolbar />
         <div className={classes.content}>{children}</div>
-        <Breadcrumbs />
+        {/* <Breadcrumbs /> */}
       </main>
       <Drawer
         className={classes.drawer}
