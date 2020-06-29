@@ -4,6 +4,7 @@ import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
 import { Newsfeed } from '../features/newsfeed';
 import { MobilityGraph } from '../features/mobility-graph';
+import { CountryStatsGraph } from '../features/country-stats-graph';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,10 +14,11 @@ const useStyles = makeStyles((theme) => ({
 
 const tabs = [
   {
-    label: 'Maps',
+    label: 'Stats',
     component: () => (
       <>
         <h1> Test </h1>
+        <CountryStatsGraph />
       </>
     )
   },

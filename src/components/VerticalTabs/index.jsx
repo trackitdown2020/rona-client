@@ -7,7 +7,7 @@ import { TabPanel } from './TabPanel';
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`
   };
 }
 
@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: '#fff',
     justifyContent: 'stretch',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   tabs: {
-    borderRight: '1px solid #d0d0d0',
+    borderRight: '1px solid #d0d0d0'
   },
   content: {
-    padding: '1rem',
-  },
+    padding: '1rem'
+  }
 }));
 
 function VerticalTabs({ tabs }) {
@@ -34,6 +34,8 @@ function VerticalTabs({ tabs }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  console.log(tabs);
 
   return (
     <div className={classes.root}>
@@ -56,7 +58,7 @@ function VerticalTabs({ tabs }) {
           value={value}
           index={index}
         >
-          {tab.content}
+          {tab.component()}
         </TabPanel>
       ))}
     </div>
