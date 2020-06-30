@@ -4,13 +4,9 @@ import { MobilityGraph } from '../features/mobility-graph';
 import { Newsfeed } from '../features/newsfeed';
 
 function Mobility() {
-  const renderContent = () => {
-    return <MobilityGraph />;
-  };
-
   return (
     <Layout title={'Mobility Tracker'} renderToolbar={() => <Newsfeed />}>
-      {renderContent()}
+      <MobilityGraph />;
     </Layout>
   );
 }

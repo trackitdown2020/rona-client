@@ -4,6 +4,7 @@ import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
 import { Newsfeed } from '../features/newsfeed';
 import { MobilityGraph } from '../features/mobility-graph';
+import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,16 +34,18 @@ const tabs = [
   }
 ];
 
-const renderVerticalTabs = () => {
-  return <VerticalTabs tabs={tabs} />;
-};
-
 const renderNewsfeed = () => <Newsfeed />;
 
 function Home() {
+  const { selectedCountry } = useAppState();
+  const { name = 'World' } = selectedCountry;
   const classes = useStyles();
 
-  return <Layout renderToolbar={renderNewsfeed}>{renderVerticalTabs()}</Layout>;
+  return (
+    <Layout title={name} renderToolbar={renderNewsfeed}>
+      <VerticalTabs tabs={tabs} />
+    </Layout>
+  );
 }
 
 export { Home };
