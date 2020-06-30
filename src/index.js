@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux';
-import { configureStore } from './store';
 import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router';
+import { Home, Stats, Mobility } from './routes';
+import { AppStateProvider } from 'state/AppStateProvider';
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
+  <AppStateProvider>
     <BrowserRouter>
-      <App/>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/stats" component={Stats}/>
+        <Route path="/mobility" component={Mobility}/>
+      </Switch>
     </BrowserRouter>
-  </Provider>,
+  </AppStateProvider>,
   document.getElementById('root')
 );
