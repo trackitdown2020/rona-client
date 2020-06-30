@@ -11,6 +11,9 @@
     "@mdi/react": "^1.4.0",
     "@nivo/line": "^0.62.0",
     "clsx": "^1.1.0",
+    "d3-fetch": "^1.1.2",
+    "d3-scale": "^3.2.1",
+    "iso-3166-1": "^1.1.0",
     "husky": "^4.2.5",
     "i18n-iso-countries": "^6.0.0",
     "leaflet": "^1.6.0",
@@ -25,10 +28,12 @@
     "react-dom": "^16.13.1",
     "react-google-charts": "^3.0.15",
     "react-leaflet": "^2.7.0",
+    "react-map-gl": "^5.2.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
-    "react-use": "^15.2.2",
+    "react-simple-maps": "^2.1.0",
+    "react-use": "^15.1.1",
     "use-count-up": "^2.1.4"
   },
   "devDependencies": {

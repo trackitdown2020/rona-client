@@ -3,14 +3,14 @@ import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 
 const getPrimaryColor = (source) => {
-  console.log({source})
+  console.log({ source });
   let color;
-  switch(source) {
+  switch (source) {
     case 'google':
       color = '#db3236';
       break;
     case 'reddit':
-      color = '#FF5700'
+      color = '#FF5700';
       break;
     case 'twitter':
     default:
@@ -18,7 +18,7 @@ const getPrimaryColor = (source) => {
       break;
   }
   return color;
-}
+};
 
 const createStyles = (source) => ({
   root: {
@@ -28,23 +28,29 @@ const createStyles = (source) => ({
     marginBottom: -1,
     minHeight: 56,
     '&$expanded': {
-      minHeight: 56,
-    },
+      minHeight: 56
+    }
   },
   content: {
     '&$expanded': {
-      margin: '12px 0',
-    },
+      margin: '12px 0'
+    }
   },
-  expanded: {},
+  expanded: {}
 });
 
-export const ExpansionPanelSummary = withStyles(createStyles())(MuiExpansionPanelSummary);
+export const ExpansionPanelSummary = withStyles(createStyles())(
+  MuiExpansionPanelSummary
+);
 
-export const TwitterExpansionPanelSummary = withStyles(createStyles('twitter'))(MuiExpansionPanelSummary);
+export const TwitterExpansionPanelSummary = withStyles(createStyles('twitter'))(
+  MuiExpansionPanelSummary
+);
 
-export const GoogleExpansionSummary = withStyles(createStyles('google'))(MuiExpansionPanelSummary);
+export const GoogleExpansionSummary = withStyles(createStyles('google'))(
+  MuiExpansionPanelSummary
+);
 
-export const RedditExpansionSummary = withStyles(createStyles('reddit'))(MuiExpansionPanelSummary);
-  
-
+export const RedditExpansionSummary = withStyles(createStyles('reddit'))(
+  MuiExpansionPanelSummary
+);

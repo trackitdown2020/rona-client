@@ -6,6 +6,7 @@ import { Newsfeed } from '../features/newsfeed';
 import { MobilityGraph } from '../features/mobility-graph';
 import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
+import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
 
 const useStyles = makeStyles((theme) => ({
   container: {
