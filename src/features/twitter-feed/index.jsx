@@ -4,8 +4,10 @@ import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { RotatingListItems } from '../../components/RotatingListItems';
 import { TwitterItem } from '../../components/ListItems/components';
+import useAppState from 'state/AppStateProvider';
 
 function TwitterFeed() {
+  const { openLiveStream } = useAppState();
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
       'http://localhost:8080/twitter/popularTweets?query=coronavirus+covid-19'
@@ -26,6 +28,7 @@ function TwitterFeed() {
         items={value}
         ItemComponent={TwitterItem}
         interval={3000}
+        isRunning={openLiveStream}
       />
     );
   };

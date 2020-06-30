@@ -4,8 +4,10 @@ import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { RotatingListItems } from '../../components/RotatingListItems';
 import { RedditPostItem } from '../../components/ListItems/components';
+import useAppState from 'state/AppStateProvider';
 
 function RedditFeed() {
+  const { openLiveStream } = useAppState();
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
       'http://localhost:8080/reddit/subredditHot?subreddits=coronavirus,covid19&limit=5'
@@ -23,7 +25,13 @@ function RedditFeed() {
       console.log(error);
     }
 
-    return <RotatingListItems items={value} ItemComponent={RedditPostItem} />;
+    return (
+      <RotatingListItems
+        items={value}
+        ItemComponent={RedditPostItem}
+        isRunning={openLiveStream}
+      />
+    );
   };
 
   return (

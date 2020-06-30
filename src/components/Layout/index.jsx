@@ -10,6 +10,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import { SettingsModal } from '../..//features/settings-modal';
 import useAppState from 'state/AppStateProvider';
 
@@ -49,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Layout({ title, children, renderToolbar }) {
-  const { handleOpenSettingsModal } = useAppState();
+  const {
+    handleOpenSettingsModal,
+    handleLiveStream,
+    openLiveStream
+  } = useAppState();
+  console.log(openLiveStream);
   const classes = useStyles();
 
   return (
@@ -67,6 +73,9 @@ export function Layout({ title, children, renderToolbar }) {
           <Button color="inherit" onClick={handleOpenSettingsModal}>
             <SettingsIcon />
           </Button>
+          <Button color="inherit" onClick={handleLiveStream}>
+            <ViewStreamIcon />
+          </Button>
         </Toolbar>
       </AppBar>
       <main className={classes.main}>
@@ -76,11 +85,12 @@ export function Layout({ title, children, renderToolbar }) {
       </main>
       <Drawer
         className={classes.drawer}
-        variant="permanent"
+        variant="persistent"
         classes={{
           paper: classes.drawerPaper
         }}
         anchor="right"
+        open={openLiveStream}
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
