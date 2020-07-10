@@ -17,12 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const tabs = [
   {
     label: 'Stats',
-    component: () => (
-      <>
-        <h1> Test </h1>
-        <CountryStatsGraph />
-      </>
-    )
+    component: () => <CountryStatsGraph />
   },
   {
     label: 'Heat Maps',

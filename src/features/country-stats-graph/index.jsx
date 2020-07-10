@@ -25,17 +25,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CountryStatsGraph() {
-  console.log('here');
   const { selectedCountry } = useAppState();
+  const { name, alpha3Code } = selectedCountry;
   const classes = useStyles();
+
+  console.log({ alpha3Code });
 
   const { value, loading, error } = useAsync(async () => {
     const response = await fetch(
-      `http://localhost:8080/covid19/timeSeries/country?country=CHN`
+      `http://localhost:8080/covid19/timeSeries/country?country=${alpha3Code}`
     );
     const result = await response.json();
     return result;
-  });
+  }, [alpha3Code]);
 
   if (loading || !value) {
     return <LoadingSpinner />;
@@ -49,23 +51,9 @@ function CountryStatsGraph() {
         </CardMedia>
       </CardActionArea>
       <CardContent>
-        {/* <div className={classes.chipsContainer}>
-                <ChipSelectors onClick={onToggle} />
-                </div>
-                <Typography gutterBottom variant="h5" component="h2">
-                Mobility in US
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                The data is scraped from{' '}
-                <Link
-                    href="https://www.google.com/covid19/mobility/"
-                    onClick={preventDefault}
-                >
-                    Google Mobility Reports
-                </Link>{' '}
-                and is designed to evaluate the overall percentage changes of people
-                movement. [INSERT MORE COMMENTS]
-                </Typography> */}
+        <Typography gutterBottom variant="h5" component="h2">
+          Overall {name} Statistics
+        </Typography>
       </CardContent>
     </Card>
   );

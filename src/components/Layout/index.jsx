@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import { SettingsModal } from '../..//features/settings-modal';
 import useAppState from 'state/AppStateProvider';
+import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 
 const drawerWidth = 450;
 
@@ -51,11 +52,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function Layout({ title, children, renderToolbar }) {
   const {
+    setSelectedCountry,
     handleOpenSettingsModal,
     handleLiveStream,
     openLiveStream
   } = useAppState();
-  console.log(openLiveStream);
   const classes = useStyles();
 
   return (
@@ -64,12 +65,20 @@ export function Layout({ title, children, renderToolbar }) {
       <SettingsModal />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar classes={classes.toolbar}>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            {title}
-          </Typography>
+          {title === 'World' ? (
+            <Typography variant="h5" className={classes.title}>
+              World
+            </Typography>
+          ) : (
+            <>
+              <ArrowBackIosOutlinedIcon
+                onClick={() => setSelectedCountry({})}
+              />
+              <Typography variant="h5" className={classes.title}>
+                {title}
+              </Typography>
+            </>
+          )}
           <Button color="inherit" onClick={handleOpenSettingsModal}>
             <SettingsIcon />
           </Button>
@@ -81,7 +90,6 @@ export function Layout({ title, children, renderToolbar }) {
       <main className={classes.main}>
         <Toolbar />
         <div className={classes.content}>{children}</div>
-        {/* <Breadcrumbs /> */}
       </main>
       <Drawer
         className={classes.drawer}
