@@ -39,6 +39,7 @@ function Graph({ data }) {
         orient: 'bottom',
         legendOffset: 35
       }}
+      colors={{ scheme: 'dark2' }}
       curve={'linear'}
       enablePoints={false}
       enablePointLabel={false}

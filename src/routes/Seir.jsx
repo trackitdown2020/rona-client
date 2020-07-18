@@ -5,12 +5,12 @@ import { Newsfeed } from '../features/newsfeed';
 
 function Seir() {
   const renderContent = () => {
-    return <SeirGraph />;
+    return;
   };
 
   return (
     <Layout title={'Seir Graph'} renderToolbar={() => <Newsfeed />}>
-      {renderContent()}
+      <SeirGraph />
     </Layout>
   );
 }
