@@ -12,6 +12,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import { preventDefault } from '../../lib/utils/links';
 import Link from '@material-ui/core/Link';
+import useAppState from '../../state/AppStateProvider';
 
 const useStyles = makeStyles((theme) => ({
   graph: {
@@ -24,10 +25,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SeirGraph() {
+  const { selectedCountry } = useAppState();
+  console.log(selectedCountry);
+  const { name } = selectedCountry;
+
   const classes = useStyles();
   const { value, loading, error } = useAsync(async () => {
+    console.log(name);
     const response = await fetch(
-      `http://localhost:8080/dataModels/CountrySEIR?country=china`
+      `http://localhost:8080/dataModels/CountrySEIR?country=${name}`
     );
     const result = await response.json();
     return result;
