@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
@@ -25,23 +25,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SeirGraph() {
-  const { selectedCountry } = useAppState();
-  console.log(selectedCountry);
-  const { name } = selectedCountry;
-
+  const [loading, setLoading] = useState(true);
+  const [value, setValue] = useState([]);
   const classes = useStyles();
-  const { value, loading, error } = useAsync(async () => {
-    console.log(name);
-    const response = await fetch(
-      `http://localhost:8080/dataModels/CountrySEIR?country=${name}`
-    );
-    const result = await response.json();
-    return result;
-  });
+  const { selectedCountry } = useAppState();
+  const { name = 'china' } = selectedCountry;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `http://localhost:8080/dataModels/CountrySEIR?country=${name
+          .trim()
+          .toLowerCase()}`
+      );
+      const result = await response.json();
+      setValue(result);
+      setLoading(false);
+    };
+    fetchData();
+  }, [name]);
 
   if (loading || !value) {
     return <LoadingSpinner />;
   }
+
+  console.log(value);
 
   return (
     <Card className={classes.root}>
