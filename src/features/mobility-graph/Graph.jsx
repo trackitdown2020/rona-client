@@ -1,5 +1,8 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import { useAsync } from 'react-use';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
+import { idMap } from './constants';
 
 const properties = {
   width: 1400,
@@ -9,7 +12,28 @@ const properties = {
   enableSlices: 'x'
 };
 
-function Graph({ data }) {
+function Graph({ locations }) {
+  const { value, loading, error } = useAsync(async () => {
+    // Change to url builder
+    const response = await fetch(
+      `http://localhost:8080/covid19/mobility?country=US&type=all`
+    );
+    const result = await response.json();
+    return result;
+  });
+
+  if (loading || !value) {
+    return <LoadingSpinner />;
+  }
+
+  const data =
+    locations.length > 0
+      ? value.filter(({ id }) => {
+          console.log(id);
+          return locations.includes(idMap[id]);
+        })
+      : value;
+
   return (
     <ResponsiveLine
       {...properties}
