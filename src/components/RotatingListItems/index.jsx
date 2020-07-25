@@ -8,7 +8,7 @@ import { useInterval } from 'react-use';
 
 function RotatingListItems(props) {
   const classes = useStyles();
-  const { ItemComponent, items, interval = 5000 } = props;
+  const { ItemComponent, items, interval = 5000, isRunning } = props;
   const [list, setList] = useState(items);
 
   const rotateList = () => {
@@ -18,7 +18,7 @@ function RotatingListItems(props) {
     setList(listCopy);
   };
 
-  useInterval(rotateList, interval);
+  useInterval(rotateList, isRunning ? interval : null);
 
   return (
     <List className={clsx(classes.root, classes.tweetList)}>

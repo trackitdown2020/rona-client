@@ -12,6 +12,13 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import MaterialTable from 'material-table';
 import countries from 'i18n-iso-countries';
 
+const columns = [
+  { title: 'Province', field: 'region.province' },
+  { title: 'Confirmed', field: 'confirmed' },
+  { title: 'Deaths', field: 'deaths' },
+  { title: 'Recovered', field: 'recovered' }
+];
+
 function CountryTable() {
   const { selectedCountry } = useAppState();
   const { name, code } = selectedCountry;
@@ -24,13 +31,6 @@ function CountryTable() {
     const result = await response.json();
     return result;
   });
-
-  const columns = [
-    { title: 'Province', field: 'region.province' },
-    { title: 'Confirmed', field: 'confirmed' },
-    { title: 'Deaths', field: 'deaths' },
-    { title: 'Recovered', field: 'recovered' }
-  ];
 
   if (loading || !value) {
     return <LoadingSpinner />;

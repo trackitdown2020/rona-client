@@ -1,8 +1,5 @@
 import React from 'react';
-import { useAsync } from 'react-use';
 import Grid from '@material-ui/core/Grid';
-import { StatsDisplayCard } from '../../components/StatsDisplayCard';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
@@ -13,26 +10,6 @@ export const useStyles = makeStyles((theme) => ({
 
 function WorldStatsCards() {
   const classes = useStyles();
-  const { value, loading, error } = useAsync(async () => {
-    const response = await fetch('http://localhost:8080/covid19/globalSummary');
-    const result = await response.json();
-    return result;
-  });
-
-  const renderBody = () => {
-    if (loading || !value) {
-      return <LoadingSpinner />;
-    }
-
-    const { TotalConfirmed, TotalDeaths, TotalRecovered } = value;
-    return (
-      <>
-        <StatsDisplayCard title={'TOTAL CONFIRMED'} value={TotalConfirmed} />
-        <StatsDisplayCard title={'TOTAL DEATHS'} value={TotalDeaths} />
-        <StatsDisplayCard title={'TOTAL RECOVERED'} value={TotalRecovered} />
-      </>
-    );
-  };
 
   return (
     <Grid

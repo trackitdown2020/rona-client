@@ -1,10 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
 import _ from 'lodash';
-import { useAsync } from 'react-use';
-import { idMap } from './constants';
 import { Graph } from './Graph';
 import { ChipSelectors } from './ChipSelectors';
 import Card from '@material-ui/core/Card';
@@ -34,14 +31,6 @@ const useStyles = makeStyles((theme) => ({
 function MobilityGraph() {
   const classes = useStyles();
   const [locations, setLocations] = useState([]);
-  const { value, loading, error } = useAsync(async () => {
-    // Change to url builder
-    const response = await fetch(
-      `http://localhost:8080/covid19/mobility?country=US&type=all`
-    );
-    const result = await response.json();
-    return result;
-  });
 
   const onToggle = ({ id: selectedId, selected }) => {
     const copyLocations = [...locations];
@@ -53,23 +42,11 @@ function MobilityGraph() {
     setLocations(copyLocations);
   };
 
-  if (loading || !value) {
-    return <LoadingSpinner />;
-  }
-
-  const data =
-    locations.length > 0
-      ? value.filter(({ id }) => {
-          console.log(id);
-          return locations.includes(idMap[id]);
-        })
-      : value;
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia className={classes.graph}>
-          <Graph data={data} />
+          <Graph locations={locations} />
         </CardMedia>
       </CardActionArea>
       <CardContent>

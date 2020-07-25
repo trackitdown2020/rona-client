@@ -1,5 +1,7 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import { useAsync } from 'react-use';
+import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 const properties = {
   width: 1400,
@@ -9,7 +11,23 @@ const properties = {
   enableSlices: 'x'
 };
 
-function Graph({ data }) {
+function Graph({ countryCode }) {
+  const { value, loading, error } = useAsync(async () => {
+    const response = await fetch(
+      `http://localhost:8080/covid19/timeSeries/country?country=${countryCode}`
+    );
+    const result = await response.json();
+    return result;
+  }, [countryCode]);
+
+  if (loading || !value) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <ResponsiveLine
       {...properties}
