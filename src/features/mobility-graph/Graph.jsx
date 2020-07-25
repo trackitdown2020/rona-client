@@ -29,7 +29,6 @@ function Graph({ locations }) {
   const data =
     locations.length > 0
       ? value.filter(({ id }) => {
-          console.log(id);
           return locations.includes(idMap[id]);
         })
       : value;

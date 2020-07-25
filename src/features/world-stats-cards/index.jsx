@@ -19,7 +19,7 @@ function WorldStatsCards() {
       alignItems="center"
       className={classes.root}
     >
-      {renderBody()}
+      {/* {renderBody()} */}
     </Grid>
   );
 }
