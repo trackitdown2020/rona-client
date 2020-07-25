@@ -8,12 +8,10 @@ export const AppStateProvider = ({ children }) => {
   const [openLiveStream, setOpenLiveStream] = useState(true);
 
   const handleOpenSettingsModal = () => {
-    console.log('open modal')
     setOpenSettingsModal(true);
   }
 
   const handleCloseSettingsModal = () => {
-    console.log('close modal')
     setOpenSettingsModal(false);
   }
 
