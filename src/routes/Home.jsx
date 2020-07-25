@@ -7,6 +7,7 @@ import { MobilityGraph } from '../features/mobility-graph';
 import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
 import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
+import EmptyState from '../components/EmptyState';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,7 +21,8 @@ const tabs = [
     component: () => (
       <>
         <h1> Test </h1>
-        <CountryStatsGraph />
+        <EmptyState sectionHeader="Stats" />
+        {/* <CountryStatsGraph /> */}
       </>
     )
   },
