@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { StatsCards } from './StatsCards';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +20,7 @@ function WorldStatsCards() {
       alignItems="center"
       className={classes.root}
     >
-      {renderBody()}
+      <StatsCards />
     </Grid>
   );
 }
