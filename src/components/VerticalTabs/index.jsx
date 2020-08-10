@@ -35,8 +35,6 @@ function VerticalTabs({ tabs }) {
     setValue(newValue);
   };
 
-  console.log(tabs);
-
   return (
     <div className={classes.root}>
       <Tabs

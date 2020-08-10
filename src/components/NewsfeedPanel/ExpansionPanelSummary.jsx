@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 
 const getPrimaryColor = (source) => {
-  console.log({ source });
   let color;
   switch (source) {
     case 'google':
