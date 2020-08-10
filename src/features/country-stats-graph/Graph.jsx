@@ -31,7 +31,7 @@ function Graph({ countryCode }) {
   return (
     <ResponsiveLine
       {...properties}
-      data={countryCode}
+      data={value}
       xScale={{
         type: 'time',
         format: '%Y-%m-%d',

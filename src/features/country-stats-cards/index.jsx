@@ -23,7 +23,7 @@ function CountryStatsCard() {
       alignItems="center"
       className={classes.root}
     >
-      <StatsCards alpha3Code={alpha3Code} />
+      <StatsCards code={alpha3Code} />
     </Grid>
   );
 }

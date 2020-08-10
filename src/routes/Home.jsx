@@ -21,7 +21,12 @@ const tabs = [
   },
   {
     label: 'Heat Maps',
-    component: () => <h1> Heat Map </h1>
+    component: () => (
+      <>
+        <h1> Heat Map </h1>
+        <WorldChorolpethMap />
+      </>
+    )
   },
   {
     label: 'Mobility',
