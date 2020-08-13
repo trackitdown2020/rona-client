@@ -17,4 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     header: {
         backgroundColor: "#c0deed"
     },
+    typographyTitle: {
+      width: '100%'
+    }
 }));

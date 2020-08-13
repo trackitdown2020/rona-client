@@ -13,7 +13,7 @@ const getPrimaryColor = (source) => {
       break;
     case 'twitter':
     default:
-      color = '#7bafd4';
+      color = '#1DA1F2';
       break;
   }
   return color;
@@ -22,7 +22,8 @@ const getPrimaryColor = (source) => {
 const createStyles = (source) => ({
   root: {
     backgroundColor: getPrimaryColor(source),
-    color: 'black',
+    // color: 'black',
+    color: '#FFF',
     borderBottom: '1px solid rgba(0, 0, 0, .125)',
     marginBottom: -1,
     minHeight: 56,

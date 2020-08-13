@@ -15,16 +15,20 @@ import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   chipsContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
     marginTop: 10,
     marginBottom: 16,
-    width: '60%'
+    width: '100%'
   },
   graph: {
     height: 600
   },
   root: {
     maxWidth: 1400,
-    margin: '5%'
+    margin: '5%',
+    boxShadow: 'unset'
   }
 }));
 

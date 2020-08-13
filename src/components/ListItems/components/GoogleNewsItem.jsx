@@ -2,12 +2,13 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 import moment from 'moment';
 import Typography from '@material-ui/core/Typography';
 import { NewsfeedAvatar } from './NewsfeedAvatar';
 import { useStyles } from '../styles';
 
-// TODO add a functoinality to expand 
+// TODO add a functoinality to expand
 // {
 //     -"source": {
 //     "id": "google-news",
@@ -22,58 +23,73 @@ import { useStyles } from '../styles';
 //     "content": "Community leaders in Guam have voiced concerns at the dangerous request from the US Navy to evacuate thousands of sailors to their island from a US aircraft carrier, where there has been an outbreak of coronavirus.\r\nNearly 3,000 sailors will be taken off the … [+3180 chars]"
 //     }
 function PrimaryText(props) {
-    const { title } = props;
-    const classes = useStyles();
-    return (
-        <>
-            <Typography component="div" variant="body1" className={classes.inline} color="textPrimary">
-                <b>{ title }</b>
-            </Typography>
-        </>
-    );
+  const { title } = props;
+  const classes = useStyles();
+  return (
+    <>
+      <Typography
+        component="div"
+        variant="body1"
+        className={classes.inline}
+        color="textPrimary"
+      >
+        <b>{title}</b>
+      </Typography>
+    </>
+  );
 }
 
 function SecondaryText(props) {
-    const { publishedAt, source} = props;
-    const classes = useStyles();
-    return (
-        <>
-            <div>
-                <Typography component="span" variant="caption" className={classes.inline} color="textPrimary">
-                    {source}
-                </Typography>
-            </div>
-            <div>
-                <Typography component="span" variant="caption" className={classes.inline} color="textPrimary">
-                    { moment(publishedAt).fromNow() }
-                </Typography>
-            </div>
-        </>
-    );
+  const { publishedAt, source } = props;
+  const classes = useStyles();
+  return (
+    <>
+      <div>
+        <Typography
+          component="span"
+          variant="caption"
+          className={classes.inline}
+          color="textPrimary"
+        >
+          {source}
+        </Typography>
+      </div>
+      <div>
+        <Typography
+          component="span"
+          variant="caption"
+          className={classes.inline}
+          color="textPrimary"
+        >
+          {moment(publishedAt).fromNow()}
+        </Typography>
+      </div>
+    </>
+  );
 }
 
-
 function GoogleNewsItem(props) {
-    const { 
-        title, 
-        url,
-        publishedAt,
-        sourceId,
-        sourceName
-    } = props;
+  const { title, url, publishedAt, sourceId, sourceName, urlToImage } = props;
 
-    const handleOnClick = () => {
-        window.open(url);
-    }
+  const handleOnClick = () => {
+    window.open(url);
+  };
 
-    return (
-        <ListItem alignItems="flex-start" button onClick={handleOnClick}>
-            <ListItemText
-                primary={<PrimaryText title={title}/>}
-                secondary={<SecondaryText publishedAt={publishedAt} source={sourceName}/>}
-            />
-        </ListItem>
-    )
+  return (
+    <ListItem alignItems="flex-start" button onClick={handleOnClick}>
+      {urlToImage && (
+        <ListItemAvatar>
+          <Avatar alt="News Thumnail" src={urlToImage} />
+        </ListItemAvatar>
+      )}
+      <ListItemText
+        primary={<PrimaryText title={title} />}
+        secondary={
+          <SecondaryText publishedAt={publishedAt} source={sourceName} />
+        }
+      />
+    </ListItem>
+  );
 }
 
 export { GoogleNewsItem };

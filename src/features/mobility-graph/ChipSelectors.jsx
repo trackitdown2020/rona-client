@@ -5,9 +5,14 @@ import { typeSelection } from './constants';
 
 function ChipSelectors({ onClick }) {
   return (
-    <Grid container direction="row" justify="space-around" alignItems="center">
-      {typeSelection.map(({ id, label }) => (
-        <Chip id={id} label={label} onClick={onClick} />
+    <Grid container direction="row" justify="flex-start" alignItems="center">
+      {typeSelection.map(({ id, label }, index) => (
+        <Chip
+          id={id}
+          label={label}
+          onClick={onClick}
+          last={typeSelection.length === index - 1}
+        />
       ))}
     </Grid>
   );

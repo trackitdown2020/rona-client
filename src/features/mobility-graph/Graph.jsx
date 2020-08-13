@@ -5,7 +5,6 @@ import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { idMap } from './constants';
 
 const properties = {
-  width: 1400,
   height: 600,
   margin: { top: 50, right: 200, bottom: 50, left: 80 },
   animate: true,
