@@ -15,12 +15,8 @@ function Graph({ data }) {
       {...properties}
       data={data}
       xScale={{
-        type: 'time',
-        format: '%d',
-        useUTC: false,
-        precision: 'day'
+        type: 'point'
       }}
-      xFormat="time:%d"
       yScale={{
         type: 'linear',
         stacked: false
@@ -29,15 +25,15 @@ function Graph({ data }) {
         legend: 'Population',
         legendPosition: 'middle',
         legendOffset: -60,
-        format: (value) => `${value}%`
+        format: (value) => `${value}`
       }}
       axisBottom={{
-        format: '%d',
         legend: 'time',
         legendOffset: -12,
         legendPosition: 'middle',
         orient: 'bottom',
-        legendOffset: 35
+        legendOffset: 35,
+        format: (tick) => (tick % 5 === 0 ? tick : '')
       }}
       colors={{ scheme: 'dark2' }}
       curve={'linear'}
