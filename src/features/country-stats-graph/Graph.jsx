@@ -13,6 +13,7 @@ const properties = {
 
 function Graph({ countryCode }) {
   const { value, loading, error } = useAsync(async () => {
+    // Default it to world one
     const response = await fetch(
       `http://localhost:8080/covid19/timeSeries/country?country=${countryCode}`
     );
