@@ -8,7 +8,7 @@ import { useInterval } from 'react-use';
 import { useTransition, animated as a } from 'react-spring';
 import { mdiFormatLetterCaseLower, mdiFormatListCheckbox } from '@mdi/js';
 
-const DEFAULT_ANIMATION_DELAY = 750;
+const DEFAULT_ANIMATION_DELAY = 780;
 
 function RotatingListItems(props) {
   const classes = useStyles();
