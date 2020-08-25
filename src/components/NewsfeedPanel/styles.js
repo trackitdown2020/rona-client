@@ -19,5 +19,11 @@ export const useStyles = makeStyles((theme) => ({
     },
     typographyTitle: {
       width: '100%'
+    },
+    newsfeedTitleContainer: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%'
     }
 }));

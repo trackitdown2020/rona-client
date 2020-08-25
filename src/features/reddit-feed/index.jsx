@@ -1,26 +1,22 @@
 import React from 'react';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { Newsfeed } from './Newsfeed';
+import NewsfeedTitle from '../../components/NewsfeedPanel/NewsfeedTitle';
 import useAppState from 'state/AppStateProvider';
-import { useStyles } from './styles';
 
 function RedditFeed() {
   const { openLiveStream } = useAppState();
-  const styles = useStyles();
-
-  const title = () => {
-    return (
-      <div className={styles.root}>
-        Reddit Hot Posts
-        <div>
-          <i class="fab fa-reddit-alien"></i>
-        </div>
-      </div>
-    );
-  };
 
   return (
-    <NewsfeedPanel panelTitle={title()} source={'reddit'}>
+    <NewsfeedPanel
+      panelTitle={
+        <NewsfeedTitle
+          title={'Reddit Hot Posts'}
+          icon={<i className="fab fa-reddit-alien" />}
+        />
+      }
+      source={'reddit'}
+    >
       <Newsfeed openLiveStream />
     </NewsfeedPanel>
   );
