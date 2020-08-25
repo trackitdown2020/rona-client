@@ -8,11 +8,13 @@ import { useInterval } from 'react-use';
 import { useTransition, animated as a } from 'react-spring';
 import { mdiFormatLetterCaseLower, mdiFormatListCheckbox } from '@mdi/js';
 
+const DEFAULT_ANIMATION_DELAY = 750;
+
 function RotatingListItems(props) {
   const classes = useStyles();
   const { ItemComponent, items, interval = 5000, isRunning } = props;
   const [list, setList] = useState(items);
-  const [rotation, setRotation] = useState(false);
+
   const rotateList = () => {
     const listCopy = [...list];
     const firstItem = listCopy.shift();
@@ -20,10 +22,10 @@ function RotatingListItems(props) {
     setTimeout(() => {
       listCopy.push(firstItem);
       setList(listCopy);
-    }, 780);
+    }, DEFAULT_ANIMATION_DELAY);
   };
 
-  useInterval(rotateList, isRunning ? 5000 : null);
+  useInterval(rotateList, isRunning ? interval : null);
 
   const determineKey = (item) => {
     if (item.id) {
@@ -43,13 +45,7 @@ function RotatingListItems(props) {
   });
 
   return (
-    <List
-      className={clsx(
-        classes.root,
-        classes.tweetList,
-        rotation && classes.hide
-      )}
-    >
+    <List className={clsx(classes.root, classes.tweetList)}>
       {transitions.map(({ item, props, key }, index, list) => {
         return (
           <a.div key={key} style={props}>

@@ -11,7 +11,4 @@ export const useStyles = makeStyles(theme => ({
     tweetList: {
       width: '100%',
     },
-    hide: {
-      // opacity: 0.2
-    }
 }));
