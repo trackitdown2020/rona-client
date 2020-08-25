@@ -4,9 +4,14 @@ export const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
       backgroundColor: theme.palette.background.paper,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      opacity: 1,
+      transition: 'all ease-in-out 0.4s'
     },
     tweetList: {
       width: '100%',
     },
+    hide: {
+      // opacity: 0.2
+    }
 }));
