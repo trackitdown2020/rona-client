@@ -7,6 +7,7 @@ import { MobilityGraph } from '../features/mobility-graph';
 import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
 import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
+import { AppleMobilityGraph } from '../features/apple-mobility-graph';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -29,9 +30,14 @@ const tabs = [
     )
   },
   {
-    label: 'Mobility',
+    label: 'Google Mobility Data',
     title: 'Mobility of people',
     component: () => <MobilityGraph />
+  },
+  {
+    label: 'Apple Mobility Data',
+    title: 'Mobility',
+    component: () => <AppleMobilityGraph />
   }
 ];
 
