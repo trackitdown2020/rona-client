@@ -23,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
     borderRight: '1px solid #d0d0d0'
   },
   content: {
-    padding: '1rem'
+    padding: '1rem',
+    minHeight: '100vh',
+    width: 'calc(100% - 590px)',
+    minWidth: 800
   }
 }));
 

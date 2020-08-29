@@ -17,7 +17,8 @@ import useAppState from 'state/AppStateProvider';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 1400,
-    margin: '5%'
+    margin: '5%',
+    boxShadow: 'unset'
   },
   graph: {
     height: 600

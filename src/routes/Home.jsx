@@ -11,10 +11,13 @@ import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
 const useStyles = makeStyles((theme) => ({
   container: {
     width: 450
+  },
+  header: {
+    marginBottom: 20
   }
 }));
 
-const tabs = [
+const tabs = (classes) => [
   {
     label: 'Stats',
     component: () => <CountryStatsGraph />
@@ -23,7 +26,7 @@ const tabs = [
     label: 'Heat Maps',
     component: () => (
       <>
-        <h1> Heat Map </h1>
+        <h1 className={classes.header}> Heat Map </h1>
         <WorldChorolpethMap />
       </>
     )
@@ -44,7 +47,7 @@ function Home() {
 
   return (
     <Layout title={name} renderToolbar={renderNewsfeed}>
-      <VerticalTabs tabs={tabs} />
+      <VerticalTabs tabs={tabs(classes)} />
     </Layout>
   );
 }

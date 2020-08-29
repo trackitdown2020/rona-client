@@ -35,7 +35,9 @@ function NewsfeedPanel(props) {
           aria-controls={`${panelTitle}-content`}
           id={`${panelTitle}-header`}
         >
-          <Typography variant={'h6'}>{panelTitle}</Typography>
+          <Typography className={classes.typographyTitle} variant={'h6'}>
+            {panelTitle}
+          </Typography>
         </ExpansionPanelSummaryComponent>
         <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
       </ExpansionPanel>
