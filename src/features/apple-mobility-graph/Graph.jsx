@@ -13,22 +13,22 @@ import moment from 'moment';
 import { useAsync } from 'react-use';
 
 function Graph({ country, subregion }) {
-  // const { value, loading, error } = useAsync(async () => {
-  //     if(country && subregion) {
-  //         const response = await fetch(
-  //             `http://localhost:8080/covid19/mobility/apple?country=${country}&subregion=${subregion}`
-  //         );
-  //         const result = await response.json();
-  //         return result;
-  //     }
-  // }, [country, subregion]);
   const { value, loading, error } = useAsync(async () => {
-    const response = await fetch(
-      'http://localhost:8080/covid19/mobility/apple?country=USA&subregion=California'
-    );
-    const result = await response.json();
-    return result;
-  }, []);
+    if (country && subregion) {
+      const response = await fetch(
+        `http://localhost:8080/covid19/mobility/apple?country=${country}&subregion=${subregion}`
+      );
+      const result = await response.json();
+      return result;
+    }
+  }, [country, subregion]);
+  //   const { value, loading, error } = useAsync(async () => {
+  //     const response = await fetch(
+  //       'http://localhost:8080/covid19/mobility/apple?country=USA&subregion=California'
+  //     );
+  //     const result = await response.json();
+  //     return result;
+  //   }, []);
 
   if (loading || !value) {
     return <LoadingSpinner />;
