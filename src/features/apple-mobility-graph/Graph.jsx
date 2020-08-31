@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  XYPlot,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
-  ChartLabel,
-  HorizontalGridLines,
-  VerticalGridLines,
-  LineSeries
-} from 'react-vis';
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  Label
+} from 'recharts';
+import { GraphTooltip } from './GraphTooltip';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
+import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { useAsync } from 'react-use';
 
@@ -22,75 +25,51 @@ function Graph({ country, subregion }) {
       return result;
     }
   }, [country, subregion]);
-  //   const { value, loading, error } = useAsync(async () => {
-  //     const response = await fetch(
-  //       'http://localhost:8080/covid19/mobility/apple?country=USA&subregion=California'
-  //     );
-  //     const result = await response.json();
-  //     return result;
-  //   }, []);
+  // const { value, loading, error } = useAsync(async () => {
+  //   const response = await fetch(
+  //     'http://localhost:8080/covid19/mobility/apple?country=USA&subregion=California'
+  //   );
+  //   const result = await response.json();
+  //   return result;
+  // }, []);
+
+  const formatXAxis = (d) => {
+    return moment(d).format('MMMM YYYY');
+  };
+
+  const formatYAxis = (d) => {
+    return `${d}%`;
+  };
 
   if (loading || !value) {
     return <LoadingSpinner />;
   }
 
-  const { driving, transit, walking } = value;
+  const { data } = value;
   return (
-    <XYPlot width={1200} height={700}>
-      <HorizontalGridLines />
-      <VerticalGridLines
-        style={{
-          stroke: '#ececec'
-        }}
-      />
+    <LineChart width={1100} height={700} data={data}>
       <XAxis
-        attr="x"
-        attrAxis="y"
-        orientation="bottom"
-        tickTotal={10}
-        tickFormat={(d) => moment(d).format('MMMM YYYY')}
+        axisLine
+        type={'number'}
+        dataKey="date"
+        tickFormatter={formatXAxis}
+        domain={['auto', 'auto']}
       />
-      <YAxis tickFormat={(v) => `${v} %`} />
-      <ChartLabel
-        text="Date"
-        className="alt-x-label"
-        includeMargin={false}
-        xPercent={0.025}
-        yPercent={1.01}
-      />
-      <ChartLabel
-        text="Percentage Change since 01/13"
-        className="alt-y-label"
-        includeMargin={false}
-        xPercent={0.06}
-        yPercent={0.06}
-        style={{
-          transform: 'rotate(-90)',
-          textAnchor: 'end'
+      <YAxis
+        domain={[-100, 100]}
+        tickFormatter={formatYAxis}
+        label={{
+          value: 'Percentage Change since 01/13',
+          angle: -90,
+          position: 'insideLeft'
         }}
       />
-      <LineSeries
-        className="driving-series"
-        data={driving}
-        style={{
-          fillOpacity: 0
-        }}
-      />
-      <LineSeries
-        className="transit-series"
-        data={transit}
-        style={{
-          fillOpacity: 0
-        }}
-      />
-      <LineSeries
-        className="walking-series"
-        data={walking}
-        style={{
-          fillOpacity: 0
-        }}
-      />
-    </XYPlot>
+      <Tooltip content={<GraphTooltip />} />
+      <Legend verticalAlign="top" align="center" />
+      <Line type="monotone" dataKey="driving" stroke="#8884d8" />
+      <Line type="monotone" dataKey="transit" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="walking" stroke="black" />
+    </LineChart>
   );
 }
 

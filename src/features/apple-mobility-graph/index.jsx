@@ -20,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 1600,
     marginTop: 15
+  },
+  cardActionArea: {
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: 'white'
+    }
   }
 }));
 
@@ -54,7 +60,7 @@ function AppleMobilityGraph() {
         </Grid>
       </Grid>
       <Card className={classes.root}>
-        <CardActionArea disableRipple disabled>
+        <CardActionArea className={classes.cardActionArea} disableRipple>
           <CardMedia className={classes.graph}>
             <Graph country={country} subregion={subregion} />
           </CardMedia>
