@@ -7,6 +7,7 @@ import { MobilityGraph } from '../features/mobility-graph';
 import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
 import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
+import { VaccineCandidates } from '../features/vaccine-candidates/';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,6 +36,11 @@ const tabs = (classes) => [
     label: 'Mobility',
     title: 'Mobility of people',
     component: () => <MobilityGraph />
+  },
+  {
+    label: 'Vaccine Candidates',
+    title: 'Vaccine Candidates',
+    component: () => <VaccineCandidates />
   }
 ];
 
