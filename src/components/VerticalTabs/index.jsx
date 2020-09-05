@@ -3,6 +3,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import { TabPanel } from './TabPanel';
+import { tabs } from '../../config/tabs';
+import { useParams, useLocation } from 'react-router-dom';
 
 function a11yProps(index) {
   return {
@@ -30,12 +32,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function VerticalTabs({ tabs }) {
-  const [value, setValue] = React.useState(0);
+function VerticalTabs() {
+  const { pathname } = useLocation();
+  const cleanedPathname = pathname.replace('/', '');
   const classes = useStyles();
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    window.location.href = newValue;
   };
 
   return (
@@ -43,25 +46,20 @@ function VerticalTabs({ tabs }) {
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        value={value}
+        value={cleanedPathname}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Vertical tabs"
         className={classes.tabs}
       >
         {tabs.map((tab, index) => (
-          <Tab key={tab.label} label={tab.label} {...a11yProps(index)} />
+          <Tab
+            key={tab.label}
+            label={tab.label}
+            value={tab.route}
+            {...a11yProps(index)}
+          />
         ))}
       </Tabs>
-      {tabs.map((tab, index) => (
-        <TabPanel
-          className={classes.content}
-          key={tab.label}
-          value={value}
-          index={index}
-        >
-          {tab.component()}
-        </TabPanel>
-      ))}
     </div>
   );
 }

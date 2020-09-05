@@ -11,9 +11,11 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import { SettingsModal } from '../..//features/settings-modal';
+import { SettingsModal } from '../../features/settings-modal';
 import useAppState from 'state/AppStateProvider';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import { VerticalTabs } from '../VerticalTabs';
+import { RightToolbar } from '../RightToolbar';
 
 const drawerWidth = 450;
 
@@ -89,7 +91,10 @@ export function Layout({ title, children, renderToolbar }) {
       </AppBar>
       <main className={classes.main}>
         <Toolbar />
-        <div className={classes.content}>{children}</div>
+        <div className={classes.content}>
+          <VerticalTabs />
+          {children}
+        </div>
       </main>
       <Drawer
         className={classes.drawer}
@@ -102,7 +107,7 @@ export function Layout({ title, children, renderToolbar }) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          {renderToolbar && renderToolbar()}
+          <RightToolbar />
         </div>
       </Drawer>
     </div>
