@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 function SubregionAutocompleteField(props) {
-  const { country, subregion, onChange } = props;
+  const { country, subregion, onChange, overrideStyle } = props;
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
@@ -53,7 +53,7 @@ function SubregionAutocompleteField(props) {
   return (
     <Autocomplete
       id="asynchronous-demo"
-      style={{ width: 300 }}
+      style={overrideStyle ? overrideStyle : { width: 300 }}
       open={open}
       onOpen={handleOnOpen}
       onClose={handleOnClose}

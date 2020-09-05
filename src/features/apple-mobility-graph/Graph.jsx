@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { useAsync } from 'react-use';
 
-function Graph({ country, subregion }) {
+function Graph({ country, subregion, classes }) {
   const { value, loading, error } = useAsync(async () => {
     if (country && subregion) {
       const response = await fetch(
@@ -47,7 +47,7 @@ function Graph({ country, subregion }) {
 
   const { data } = value;
   return (
-    <LineChart width={1100} height={700} data={data}>
+    <LineChart width={1300} height={600} data={data}>
       <XAxis
         axisLine
         type={'number'}
@@ -66,9 +66,45 @@ function Graph({ country, subregion }) {
       />
       <Tooltip content={<GraphTooltip />} />
       <Legend verticalAlign="top" align="center" />
-      <Line type="monotone" dataKey="driving" stroke="#8884d8" />
-      <Line type="monotone" dataKey="transit" stroke="#82ca9d" />
-      <Line type="monotone" dataKey="walking" stroke="black" />
+      <Line
+        type="monotone"
+        dataKey="driving"
+        stroke="#172c9a"
+        name={
+          <>
+            <i className={classes.icon + ' fas fa-car'} />
+            Driving
+          </>
+        }
+        strokeWidth="1.8"
+        dot={false}
+      />
+      <Line
+        type="monotone"
+        dataKey="transit"
+        stroke="#ffda58"
+        name={
+          <>
+            <i className={classes.icon + ' fas fa-subway'} />
+            Transit
+          </>
+        }
+        strokeWidth="1.8"
+        dot={false}
+      />
+      <Line
+        type="monotone"
+        dataKey="walking"
+        stroke="#3ac690"
+        name={
+          <>
+            <i className={classes.icon + ' fas fa-walking'} />
+            Walking
+          </>
+        }
+        strokeWidth="1.8"
+        dot={false}
+      />
     </LineChart>
   );
 }

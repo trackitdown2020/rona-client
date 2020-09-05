@@ -5,12 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: '#A9A9A9'
+    backgroundColor: '#FFF',
+    padding: '10px 20px',
+    borderRadius: 4,
+    boxShadow: theme.shadows[5]
   }
 }));
 
 function GraphTooltip({ active, payload, label }) {
   const classes = useStyles();
+
   if (active) {
     return (
       <div className={classes.container}>
@@ -18,10 +22,10 @@ function GraphTooltip({ active, payload, label }) {
           {moment(label).format('MMMM DD, YYYY')}
         </Typography>
         {payload.map((dataPoint) => {
-          const { color, name, value } = dataPoint;
+          const { color, name, value, dataKey } = dataPoint;
           return (
             <Typography style={{ color }} variant="body2" gutterBottom>
-              {name.toUpperCase()}: {value}%
+              {dataKey[0].toUpperCase() + dataKey.substring(1)}: {value}%
             </Typography>
           );
         })}

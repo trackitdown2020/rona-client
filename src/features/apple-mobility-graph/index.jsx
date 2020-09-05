@@ -14,25 +14,39 @@ import { Graph } from './Graph';
 
 const useStyles = makeStyles((theme) => ({
   graph: {
-    height: 700,
-    width: 1500
+    height: 600,
+    width: '100%'
   },
   root: {
-    maxWidth: 1600,
-    marginTop: 15
+    maxWidth: 1300,
+    marginTop: 15,
+    boxShadow: 'unset'
   },
   cardActionArea: {
     '&:hover': {
       //you want this to be the same as the backgroundColor above
       backgroundColor: 'white'
     }
+  },
+  selectorContainer: {
+    display: 'flex'
+  },
+  headerRoot: {
+    width: '95%',
+    paddingTop: 20,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  icon: {
+    marginRight: 5
   }
 }));
 
 function AppleMobilityGraph() {
   const classes = useStyles();
-  const [country, setCountry] = useState('');
-  const [subregion, setSubregion] = useState('');
+  const [country, setCountry] = useState('USA');
+  const [subregion, setSubregion] = useState('California');
 
   const handleOnCountryChange = (value) => {
     setCountry(value);
@@ -44,31 +58,34 @@ function AppleMobilityGraph() {
 
   return (
     <>
-      <Grid container direction="row" justify="space-between" spacing={6}>
-        <Grid item xs={6}>
+      <div className={classes.headerRoot}>
+        <Typography gutterBottom variant="h5" component="h1">
+          Apple Mobility Data
+        </Typography>
+        <div className={classes.selectorContainer}>
           <CountryAutocompleteField
             country={country}
             onChange={handleOnCountryChange}
+            overrideStyle={{ width: 200, marginRight: 20 }}
           />
-        </Grid>
-        <Grid item xs={6}>
           <SubregionAutocompleteField
             country={country}
             subregion={subregion}
             onChange={handleOnSubregionChange}
+            overrideStyle={{ width: 180 }}
           />
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       <Card className={classes.root}>
         <CardActionArea className={classes.cardActionArea} disableRipple>
           <CardMedia className={classes.graph}>
-            <Graph country={country} subregion={subregion} />
+            <Graph country={country} subregion={subregion} classes={classes} />
           </CardMedia>
         </CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          {/* <Typography gutterBottom variant="h5" component="h2">
             Apple Mobility Data
-          </Typography>
+          </Typography> */}
         </CardContent>
       </Card>
     </>
