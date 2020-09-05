@@ -10,9 +10,6 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/stats" component={Stats} />
-        <Route path="/mobility" component={Mobility} />
-        <Route path="/seir" component={Seir} />
       </Switch>
     </BrowserRouter>
   </AppStateProvider>,
