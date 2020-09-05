@@ -76,7 +76,7 @@ function Graph({ country, subregion, classes }) {
             Driving
           </>
         }
-        strokeWidth="1.8"
+        strokeWidth="1.2"
         dot={false}
       />
       <Line
@@ -89,7 +89,7 @@ function Graph({ country, subregion, classes }) {
             Transit
           </>
         }
-        strokeWidth="1.8"
+        strokeWidth="1.2"
         dot={false}
       />
       <Line
@@ -102,7 +102,7 @@ function Graph({ country, subregion, classes }) {
             Walking
           </>
         }
-        strokeWidth="1.8"
+        strokeWidth="1.2"
         dot={false}
       />
     </LineChart>
