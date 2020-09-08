@@ -49,7 +49,7 @@ function CountryTable() {
           color: '#FFFF'
         },
         search: true,
-        pageSize: 10
+        pageSize: 200
       }}
       icons={{
         Search: SearchIcon,

@@ -11,6 +11,24 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import useAppState from '../../state/AppStateProvider';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiTableSortLabel: {
+      root: {
+        backgroundColor: '#3f51b5',
+        color: '#FFFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        '&:hover': {
+          color: '#FFFF',
+          textDecoration: 'underline'
+        }
+      }
+    }
+  }
+});
 
 function WorldTable() {
   const { setSelectedCountry } = useAppState();
@@ -56,29 +74,32 @@ function WorldTable() {
   }
 
   return (
-    <MaterialTable
-      title={'Worldwide COVID-19 Stats'}
-      columns={columns}
-      data={value}
-      options={{
-        headerStyle: {
-          backgroundColor: '#3f51b5',
-          color: '#FFFF'
-        },
-        search: true,
-        pageSize: 10
-      }}
-      icons={{
-        Search: SearchIcon,
-        ResetSearch: ClearIcon,
-        FirstPage: FirstPageIcon,
-        LastPage: LastPageIcon,
-        NextPage: ChevronRightIcon,
-        PreviousPage: ChevronLeftIcon,
-        SortArrow: ArrowUpwardIcon
-      }}
-      onRowClick={handleOnRowClick}
-    />
+    <MuiThemeProvider theme={theme}>
+      <MaterialTable
+        title={'Worldwide COVID-19 Stats'}
+        columns={columns}
+        data={value}
+        options={{
+          headerStyle: {
+            backgroundColor: '#3f51b5',
+            color: '#FFFF',
+            fontSize: 16
+          },
+          search: true,
+          pageSize: 200
+        }}
+        icons={{
+          Search: SearchIcon,
+          ResetSearch: ClearIcon,
+          FirstPage: FirstPageIcon,
+          LastPage: LastPageIcon,
+          NextPage: ChevronRightIcon,
+          PreviousPage: ChevronLeftIcon,
+          SortArrow: ArrowUpwardIcon
+        }}
+        onRowClick={handleOnRowClick}
+      />
+    </MuiThemeProvider>
   );
 }
 
