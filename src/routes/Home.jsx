@@ -6,7 +6,8 @@ import { Newsfeed } from '../features/newsfeed';
 import { MobilityGraph } from '../features/mobility-graph';
 import useAppState from '../state/AppStateProvider';
 import { CountryStatsGraph } from '../features/country-stats-graph';
-import { WorldChorolpethMap } from '../features/world-choropleth-map/index.jsx';
+import { WorldChorolpethMap } from '../features/world-choropleth-map';
+import { CountryChoroplethMap } from '../features/country-map';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,6 +36,11 @@ const tabs = (classes) => [
     label: 'Mobility',
     title: 'Mobility of people',
     component: () => <MobilityGraph />
+  },
+  {
+    label: 'Country Map',
+    title: 'Heat Map by Country',
+    component: () => <CountryChoroplethMap />
   }
 ];
 
