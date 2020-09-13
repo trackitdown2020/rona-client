@@ -92,8 +92,7 @@ export function Layout({ title, children, renderToolbar }) {
       <main className={classes.main}>
         <Toolbar />
         <div className={classes.content}>
-          <VerticalTabs />
-          {children}
+          <VerticalTabs>{children}</VerticalTabs>
         </div>
       </main>
       <Drawer

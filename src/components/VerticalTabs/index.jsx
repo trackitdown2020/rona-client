@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import { TabPanel } from './TabPanel';
 import { tabs } from '../../config/tabs';
+import { Link, Route, Switch } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 
 function a11yProps(index) {
@@ -18,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexGrow: 1,
     backgroundColor: '#fff',
-    justifyContent: 'stretch',
     flexDirection: 'row'
   },
   tabs: {
@@ -28,17 +28,52 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem',
     minHeight: '100vh',
     width: 'calc(100% - 590px)',
-    minWidth: 800
+    minWidth: 800,
+    maxWidth: '100%',
+    minHeight: '100vh',
+    height: '100vh'
+  },
+  link: {
+    textDecoration: 'unset',
+    color: 'unset'
   }
 }));
 
-function VerticalTabs() {
+function VerticalTabs(props) {
   const { pathname } = useLocation();
-  const cleanedPathname = pathname.replace('/', '');
+  const [tabIndex, setTabIndex] = useState(0);
   const classes = useStyles();
 
-  const handleChange = (event, newValue) => {
-    window.location.href = newValue;
+  useEffect(() => {
+    const cleanedPathname = pathname.replace('/', '');
+    let index;
+    switch (cleanedPathname) {
+      case 'heat-map':
+        index = 0;
+        break;
+      case 'stats':
+        index = 1;
+        break;
+      case 'mobility':
+        index = 2;
+        break;
+      default:
+        index = 0;
+        break;
+    }
+    setTabIndex(index);
+  }, [pathname]);
+
+  const handleRoute = (tab) => {
+    const { label } = tab;
+    switch (label) {
+      case 'Stats':
+        return '/stats';
+      case 'Mobility':
+        return '/mobility';
+      case 'Heat Map':
+        return '/heat-map';
+    }
   };
 
   return (
@@ -46,20 +81,22 @@ function VerticalTabs() {
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        value={cleanedPathname}
-        onChange={handleChange}
+        value={tabIndex}
         aria-label="Vertical tabs"
         className={classes.tabs}
       >
         {tabs.map((tab, index) => (
-          <Tab
-            key={tab.label}
-            label={tab.label}
-            value={tab.route}
-            {...a11yProps(index)}
-          />
+          <Link to={handleRoute(tab)} className={classes.link}>
+            <Tab
+              key={tab.label}
+              label={tab.label}
+              value={tab.route}
+              {...a11yProps(index)}
+            />
+          </Link>
         ))}
       </Tabs>
+      <div className={classes.content}>{props.children}</div>
     </div>
   );
 }

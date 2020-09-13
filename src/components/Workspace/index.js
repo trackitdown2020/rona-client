@@ -8,7 +8,6 @@ import { MobilityGraph } from '../../features/mobility-graph';
 
 function Workspace() {
     const { workspace } = useParams();
-    console.log(workspace)
 
     const renderWorkspace = () => {
         switch(workspace) {
