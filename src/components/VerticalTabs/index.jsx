@@ -57,6 +57,9 @@ function VerticalTabs(props) {
       case 'mobility':
         index = 2;
         break;
+      case 'apple-mobility':
+        index = 3;
+        break;
       default:
         index = 0;
         break;
@@ -73,6 +76,8 @@ function VerticalTabs(props) {
         return '/mobility';
       case 'Heat Map':
         return '/heat-map';
+      case 'Apple Mobility':
+        return '/apple-mobility';
     }
   };
 
