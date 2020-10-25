@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
-import { TabPanel } from './TabPanel';
 import { tabs } from '../../config/tabs';
-import { Link, Route, Switch } from 'react-router-dom';
-import { useParams, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function a11yProps(index) {
   return {
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     padding: '1rem',
-    minHeight: '100vh',
     width: 'calc(100% - 590px)',
     minWidth: 800,
     maxWidth: '100%',
@@ -78,6 +76,8 @@ function VerticalTabs(props) {
         return '/heat-map';
       case 'Apple Mobility':
         return '/apple-mobility';
+      default:
+        return '/';
     }
   };
 
@@ -91,7 +91,7 @@ function VerticalTabs(props) {
         className={classes.tabs}
       >
         {tabs.map((tab, index) => (
-          <Link to={handleRoute(tab)} className={classes.link}>
+          <Link to={handleRoute(tab)} className={classes.link} key={tab.label}>
             <Tab
               key={tab.label}
               label={tab.label}

@@ -30,7 +30,7 @@ function SubregionAutocompleteField(props) {
     return () => {
       active = false;
     };
-  }, [loading]);
+  }, [loading, country]);
 
   useEffect(() => {
     if (!open) {

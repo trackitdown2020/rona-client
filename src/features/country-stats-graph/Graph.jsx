@@ -46,8 +46,6 @@ function Graph({ countryCode }) {
         max: 100000
       }}
       axisLeft={{
-        legend: 'linear scale',
-        legendOffset: 12,
         legend: 'Number of People',
         legendPosition: 'middle',
         legendOffset: -60,
@@ -57,7 +55,6 @@ function Graph({ countryCode }) {
         format: '%b %d',
         tickValues: 'every 15 days',
         legend: 'Date',
-        legendOffset: -12,
         legendPosition: 'middle',
         orient: 'bottom',
         legendOffset: 36

@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Label
-} from 'recharts';
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { GraphTooltip } from './GraphTooltip';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
-import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { useAsync } from 'react-use';
 
 function Graph({ country, subregion, classes }) {
-  const { value, loading, error } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     if (country && subregion) {
       const response = await fetch(
         `http://localhost:8080/covid19/mobility/apple?country=${country}&subregion=${subregion}`

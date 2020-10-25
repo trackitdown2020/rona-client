@@ -12,7 +12,7 @@ const properties = {
 };
 
 function Graph({ locations }) {
-  const { value, loading, error } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     // Change to url builder
     const response = await fetch(
       `http://localhost:8080/covid19/mobility?country=US&type=all`
@@ -50,8 +50,6 @@ function Graph({ locations }) {
         max: 100
       }}
       axisLeft={{
-        legend: 'linear scale',
-        legendOffset: 12,
         legend: 'Percentage of Mobility (%)',
         legendPosition: 'middle',
         legendOffset: -60,
@@ -61,7 +59,6 @@ function Graph({ locations }) {
         format: '%b %d',
         tickValues: 'every 5 days',
         legend: 'Date',
-        legendOffset: -12,
         legendPosition: 'middle',
         orient: 'bottom',
         legendOffset: 36

@@ -2,7 +2,6 @@ import React from 'react';
 import { ExpansionPanel } from './ExpansionPanel.jsx';
 import {
   ExpansionPanelSummary,
-  TwitterExpansionPanelSummary,
   GoogleExpansionSummary,
   RedditExpansionSummary
 } from './ExpansionPanelSummary';

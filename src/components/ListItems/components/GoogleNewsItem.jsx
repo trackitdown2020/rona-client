@@ -5,7 +5,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import moment from 'moment';
 import Typography from '@material-ui/core/Typography';
-import { NewsfeedAvatar } from './NewsfeedAvatar';
 import { useStyles } from '../styles';
 
 // TODO add a functoinality to expand
@@ -69,7 +68,7 @@ function SecondaryText(props) {
 }
 
 function GoogleNewsItem(props) {
-  const { title, url, publishedAt, sourceId, sourceName, urlToImage } = props;
+  const { title, url, publishedAt, sourceName, urlToImage } = props;
 
   const handleOnClick = () => {
     window.open(url);

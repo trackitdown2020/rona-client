@@ -8,7 +8,7 @@ function GoogleNewsfeed() {
 
   return (
     <NewsfeedPanel panelTitle={'Top Headlines'} source={'google'}>
-      <Newsfeed openLiveStream />
+      <Newsfeed openLiveStream={openLiveStream} />
     </NewsfeedPanel>
   );
 }
