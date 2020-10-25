@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ComposableMap, Geographies } from 'react-simple-maps';
 
 function ChoroplethMap(props) {

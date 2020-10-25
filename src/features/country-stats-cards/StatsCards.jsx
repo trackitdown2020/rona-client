@@ -5,7 +5,7 @@ import { LoadingSpinner } from '../../components/LoadingSpinner';
 import countries from 'i18n-iso-countries';
 
 function StatsCards({ code }) {
-  const { value, loading, error } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     const isoCode = countries.alpha2ToAlpha3(code);
     const response = await fetch(
       `http://localhost:8080/covid19/countryReport?iso=${isoCode}`

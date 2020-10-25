@@ -8,6 +8,7 @@ function ChipSelectors({ onClick }) {
     <Grid container direction="row" justify="flex-start" alignItems="center">
       {typeSelection.map(({ id, label }, index) => (
         <Chip
+          key={id}
           id={id}
           label={label}
           onClick={onClick}

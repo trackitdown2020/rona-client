@@ -59,7 +59,7 @@ function SecondaryText(props) {
 }
 
 function RedditPostItem(props) {
-  const { url, title, ups, subreddit_name_prefixed, permalink } = props;
+  const { title, ups, subreddit_name_prefixed, permalink } = props;
 
   const handleOnClick = () => {
     window.open(`https://reddit.com${permalink}`);

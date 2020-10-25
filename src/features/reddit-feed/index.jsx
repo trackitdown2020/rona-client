@@ -2,10 +2,10 @@ import React from 'react';
 import { NewsfeedPanel } from '../../components/NewsfeedPanel';
 import { Newsfeed } from './Newsfeed';
 import NewsfeedTitle from '../../components/NewsfeedPanel/NewsfeedTitle';
-import useAppState from 'state/AppStateProvider';
+// import useAppState from 'state/AppStateProvider';
 
 function RedditFeed() {
-  const { openLiveStream } = useAppState();
+  // const { openLiveStream } = useAppState();
 
   return (
     <NewsfeedPanel

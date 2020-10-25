@@ -4,12 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Breadcrumbs } from '../Breadcrumbs';
 import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import { SettingsModal } from '../../features/settings-modal';
 import useAppState from 'state/AppStateProvider';
@@ -66,7 +63,7 @@ export function Layout({ title, children, renderToolbar }) {
       <CssBaseline />
       <SettingsModal />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar classes={classes.toolbar}>
+        <Toolbar>
           {title === 'World' ? (
             <Typography variant="h5" className={classes.title}>
               World

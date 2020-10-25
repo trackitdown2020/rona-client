@@ -14,7 +14,7 @@ import useAppState from '../../state/AppStateProvider';
 
 function WorldTable() {
   const { setSelectedCountry } = useAppState();
-  const { value, error, loading } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     const response = await fetch(
       'http://localhost:8080/covid19/summaryOfAllCountries'
     );

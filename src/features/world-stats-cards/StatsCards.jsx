@@ -4,7 +4,7 @@ import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { StatsDisplayCard } from '../../components/StatsDisplayCard';
 
 function StatsCards() {
-  const { value, loading, error } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     const response = await fetch('http://localhost:8080/covid19/globalSummary');
     const result = await response.json();
     return result;

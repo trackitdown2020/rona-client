@@ -22,7 +22,7 @@ function GraphTooltip({ active, payload, label }) {
           {moment(label).format('MMMM DD, YYYY')}
         </Typography>
         {payload.map((dataPoint) => {
-          const { color, name, value, dataKey } = dataPoint;
+          const { color, value, dataKey } = dataPoint;
           return (
             <Typography style={{ color }} variant="body2" gutterBottom>
               {dataKey[0].toUpperCase() + dataKey.substring(1)}: {value}%

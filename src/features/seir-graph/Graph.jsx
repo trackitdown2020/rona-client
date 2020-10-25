@@ -29,7 +29,6 @@ function Graph({ data }) {
       }}
       axisBottom={{
         legend: 'time',
-        legendOffset: -12,
         legendPosition: 'middle',
         orient: 'bottom',
         legendOffset: 35,

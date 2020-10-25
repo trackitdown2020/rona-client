@@ -1,12 +1,10 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
 import { scaleLinear } from 'd3-scale';
 import iso from 'iso-3166-1';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { useAsync } from 'react-use';
 import { ChoroplethMap } from '../../components/Maps/ChoroplethMap';
 import { Geography } from 'react-simple-maps';
-import Tooltip from '@material-ui/core/Tooltip';
 import { ChloroplethTooltip } from '../../components/Tooltip/ChloroplethTooltip';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,7 +19,7 @@ const geoUrl =
 
 function WorldChorolpethMap() {
   const classes = useStyles();
-  const { value, error, loading } = useAsync(async () => {
+  const { value, loading } = useAsync(async () => {
     const response = await fetch('http://localhost:8080/covid19/summary');
     const result = await response.json();
     return result;
