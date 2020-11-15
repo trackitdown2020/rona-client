@@ -65,7 +65,11 @@ function VaccineTimeline() {
                     return (
                       <>
                         <ListItem>
-                          <ListItemText primary={trial.tradeName.join(', ')} />
+                          <ListItemText
+                            primary={
+                              trial.tradeName && trial.tradeName.join(', ')
+                            }
+                          />
                         </ListItem>
                         <Divider />
                       </>
