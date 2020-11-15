@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   content: {}
 }));
 
-export function Layout({ title, children, renderToolbar }) {
+export function Layout({ title, children }) {
   const {
     setSelectedCountry,
     handleOpenSettingsModal,

@@ -1,6 +1,4 @@
 import React from 'react';
-import { Layout } from '../components/Layout';
-import { VerticalTabs } from '../components/VerticalTabs';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useAppState from '../state/AppStateProvider';

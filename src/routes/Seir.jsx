@@ -4,12 +4,8 @@ import { SeirGraph } from '../features/seir-graph';
 import { Newsfeed } from '../features/newsfeed';
 
 function Seir() {
-  const renderContent = () => {
-    return;
-  };
-
   return (
-    <Layout title={'Seir Graph'} renderToolbar={() => <Newsfeed />}>
+    <Layout title={'Seir Graph'}>
       <SeirGraph />
     </Layout>
   );

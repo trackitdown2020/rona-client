@@ -5,7 +5,7 @@ import { Newsfeed } from '../features/newsfeed';
 
 function Mobility() {
   return (
-    <Layout title={'Mobility Tracker'} renderToolbar={() => <Newsfeed />}>
+    <Layout title={'Mobility Tracker'}>
       <MobilityGraph />;
     </Layout>
   );

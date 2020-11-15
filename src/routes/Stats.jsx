@@ -36,10 +36,7 @@ function Stats() {
   const { name } = selectedCountry;
 
   return (
-    <Layout
-      title={name ? name : 'Worldwide COVID-19 Statistics'}
-      renderToolbar={() => <Newsfeed />}
-    >
+    <Layout title={name ? name : 'Worldwide COVID-19 Statistics'}>
       {_.isEmpty(selectedCountry)
         ? renderWorldContent()
         : renderCountryContent()}
