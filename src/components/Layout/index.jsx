@@ -17,6 +17,8 @@ import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
 import { VerticalTabs } from '../VerticalTabs';
 import { RightToolbar } from '../RightToolbar';
 
+import { useParams } from 'react-router-dom';
+
 const drawerWidth = 450;
 
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +62,7 @@ export function Layout({ title, children }) {
     openLiveStream
   } = useAppState();
   const classes = useStyles();
+  // const params = useParams();
 
   return (
     <div className={classes.root}>

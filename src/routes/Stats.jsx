@@ -18,28 +18,30 @@ const useStyles = makeStyles((theme) => ({
 function Stats() {
   const { selectedCountry } = useAppState();
   const classes = useStyles();
+  console.log(selectedCountry);
 
   const renderWorldContent = () => (
     <>
-      <WorldStatsCards />
+      {/* <WorldStatsCards /> */}
       <WorldTable />
     </>
   );
 
-  const renderCountryContent = () => (
-    <>
-      <CountryStatsCard />
-      <CountryTable />
-    </>
-  );
+  // const renderCountryContent = () => (
+  //   <>
+  //     <CountryStatsCard />
+  //     <CountryTable />
+  //   </>
+  // );
 
   const { name } = selectedCountry;
 
   return (
     <Layout title={name ? name : 'Worldwide COVID-19 Statistics'}>
-      {_.isEmpty(selectedCountry)
+      {renderWorldContent()}
+      {/* {_.isEmpty(selectedCountry)
         ? renderWorldContent()
-        : renderCountryContent()}
+        : renderCountryContent()} */}
     </Layout>
   );
 }

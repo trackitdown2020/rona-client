@@ -16,33 +16,28 @@ function WorldTable() {
   const { setSelectedCountry } = useAppState();
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/covid19/summaryOfAllCountries'
+      'http://localhost:8080/covid19/summary/country'
     );
     const result = await response.json();
     return result;
   });
 
   const columns = [
-    { title: 'Country', field: 'name' },
     {
-      title: 'Confirmed',
-      field: 'most_recent.confirmed',
-      render: (rowData) => rowData.most_recent.confirmed.toLocaleString()
+      title: 'Country',
+      field: 'country'
+    },
+    {
+      title: 'Cases',
+      field: 'cases'
     },
     {
       title: 'Recovered',
-      field: 'most_recent.recovered',
-      render: (rowData) => rowData.most_recent.recovered.toLocaleString()
+      field: 'recovered'
     },
     {
       title: 'Deaths',
-      field: 'most_recent.deaths',
-      render: (rowData) => rowData.most_recent.deaths.toLocaleString()
-    },
-    {
-      title: 'Death Rate',
-      field: 'calculated.death_rate',
-      render: (rowData) => percentageFormatter(rowData, 'calculated.death_rate')
+      field: 'deaths'
     }
   ];
 

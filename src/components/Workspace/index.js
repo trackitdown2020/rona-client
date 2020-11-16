@@ -5,6 +5,7 @@ import {
 import { CountryStatsGraph } from '../../features/country-stats-graph';
 import { WorldChorolpethMap } from '../../features/world-choropleth-map/index.jsx';
 import { MobilityGraph } from '../../features/mobility-graph';
+import { WorldTable } from '../../features/world-table';
 
 function Workspace() {
     const { workspace } = useParams();
@@ -12,7 +13,7 @@ function Workspace() {
     const renderWorkspace = () => {
         switch(workspace) {
             case 'stats':
-                return <CountryStatsGraph/>
+                return <WorldTable/>
             case 'heat-map':
                 return <WorldChorolpethMap />
             case 'mobility':
