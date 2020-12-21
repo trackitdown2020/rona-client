@@ -26,7 +26,7 @@ function CountryTable() {
   const { value, loading, error } = useAsync(async () => {
     const isoCode = countries.alpha2ToAlpha3(code);
     const response = await fetch(
-      `http://localhost:8080/covid19/countryProvinceReport?iso=${isoCode}`
+      `${process.env.REACT_APP_BASE_URL}/covid19/countryProvinceReport?iso=${isoCode}`
     );
     const result = await response.json();
     return result;

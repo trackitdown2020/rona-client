@@ -7,7 +7,7 @@ import { AppStateProvider } from 'state/AppStateProvider';
 import { Workspace } from './components/Workspace';
 import { Layout } from './components/Layout';
 
-console.log(process.env.REACT_APP_ENV)
+console.log(`Using $%{process.env.REACT_APP_ENV}`);
 
 ReactDOM.render(
   <AppStateProvider>

@@ -18,7 +18,7 @@ function SubregionAutocompleteField(props) {
 
     (async () => {
       const response = await fetch(
-        `http://localhost:8080/covid19/mobility/apple/supportedSubregions?country=${country}`
+        `${process.env.REACT_APP_BASE_URL}/covid19/mobility/apple/supportedSubregions?country=${country}`
       );
       const subregions = await response.json();
 

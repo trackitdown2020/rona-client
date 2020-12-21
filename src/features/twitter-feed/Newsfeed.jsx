@@ -9,7 +9,7 @@ function Newsfeed(props) {
 
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/twitter/popularTweets?query=coronavirus+covid-19'
+      `${process.env.REACT_APP_BASE_URL}/twitter/popularTweets?query=coronavirus+covid-19`
     );
     const result = await response.json();
     return result;

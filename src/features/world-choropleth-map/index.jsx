@@ -22,7 +22,9 @@ const geoUrl =
 function WorldChorolpethMap() {
   const classes = useStyles();
   const { value, error, loading } = useAsync(async () => {
-    const response = await fetch('http://localhost:8080/covid19/summary');
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/covid19/summary`
+    );
     const result = await response.json();
     return result;
   });

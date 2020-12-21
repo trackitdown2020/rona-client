@@ -19,19 +19,12 @@ function Graph({ country, subregion, classes }) {
   const { value, loading, error } = useAsync(async () => {
     if (country && subregion) {
       const response = await fetch(
-        `http://localhost:8080/covid19/mobility/apple?country=${country}&subregion=${subregion}`
+        `${process.env.REACT_APP_BASE_URL}/covid19/mobility/apple?country=${country}&subregion=${subregion}`
       );
       const result = await response.json();
       return result;
     }
   }, [country, subregion]);
-  // const { value, loading, error } = useAsync(async () => {
-  //   const response = await fetch(
-  //     'http://localhost:8080/covid19/mobility/apple?country=USA&subregion=California'
-  //   );
-  //   const result = await response.json();
-  //   return result;
-  // }, []);
 
   const formatXAxis = (d) => {
     return moment(d).format('MMMM YYYY');

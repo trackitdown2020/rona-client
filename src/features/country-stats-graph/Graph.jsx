@@ -14,7 +14,7 @@ const properties = {
 function Graph({ countryCode }) {
   const { value, loading, error } = useAsync(async () => {
     const response = await fetch(
-      `http://localhost:8080/covid19/timeSeries/country?country=${countryCode}`
+      `${process.env.REACT_APP_BASE_URL}/covid19/timeSeries/country?country=${countryCode}`
     );
     const result = await response.json();
     return result;
