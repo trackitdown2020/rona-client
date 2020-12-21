@@ -24,10 +24,10 @@ const HeroDisplay = (props) => {
         style={{
           borderRadius: 5,
           overflow: "hidden",
-          boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.3)"
+          boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)"
         }}
         width={'100%'}
-        height={500}
+        height={600}
       />
     </div>
   )
