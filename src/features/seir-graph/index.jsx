@@ -34,9 +34,9 @@ function SeirGraph() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:8080/dataModels/CountrySEIR?country=${name
-          .trim()
-          .toLowerCase()}`
+        `${
+          process.env.REACT_APP_BASE_URL
+        }/dataModels/CountrySEIR?country=${name.trim().toLowerCase()}`
       );
       const result = await response.json();
       setValue(result);

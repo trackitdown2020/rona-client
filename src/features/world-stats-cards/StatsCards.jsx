@@ -5,7 +5,9 @@ import { StatsDisplayCard } from '../../components/StatsDisplayCard';
 
 function StatsCards() {
   const { value, loading, error } = useAsync(async () => {
-    const response = await fetch('http://localhost:8080/covid19/globalSummary');
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/covid19/globalSummary`
+    );
     const result = await response.json();
     return result;
   });

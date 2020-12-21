@@ -18,7 +18,7 @@ function CountryAutocompleteField(props) {
 
     (async () => {
       const response = await fetch(
-        'http://localhost:8080/covid19/mobility/apple/supportedCountries'
+        `${process.env.REACT_APP_BASE_URL}/covid19/mobility/apple/supportedCountries`
       );
       const countries = await response.json();
 

@@ -9,7 +9,7 @@ function Newsfeed(props) {
 
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/reddit/subredditHot?subreddits=coronavirus,covid19&limit=5'
+      `${process.env.REACT_APP_BASE_URL}/reddit/subredditHot?subreddits=coronavirus,covid19&limit=5`
     );
     const result = await response.json();
     return result;

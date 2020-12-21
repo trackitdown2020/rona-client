@@ -16,7 +16,7 @@ function WorldTable() {
   const { setSelectedCountry } = useAppState();
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/covid19/summaryOfAllCountries'
+      `${process.env.REACT_APP_BASE_URL}/covid19/summaryOfAllCountries`
     );
     const result = await response.json();
     return result;

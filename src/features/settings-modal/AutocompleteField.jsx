@@ -18,7 +18,9 @@ function AutocompleteField() {
     }
 
     (async () => {
-      const response = await fetch('http://localhost:8080/country/all');
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/country/all`
+      );
       const countries = await response.json();
 
       if (active) {
