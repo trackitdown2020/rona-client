@@ -9,7 +9,7 @@ function Newsfeed(props) {
 
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/google/everything?q=coronavirus+covid-19'
+      `${process.env.REACT_APP_BASE_URL}/google/everything?q=coronavirus+covid-19`
     );
     const result = await response.json();
     return result;

@@ -8,7 +8,7 @@ export const useFetchMobility = (country='US', state, type) => {
     const fetchMobility = async () => {
         setLoading(true);
         try {
-            const url = new URL('http://localhost:8080/covid19/mobility');
+            const url = new URL(`${process.env.REACT_APP_BASE_URL}/covid19/mobility`);
             url.searchParams.append('country', country);
             if(state) {
                 url.searchParams.append('state', state);

@@ -62,7 +62,7 @@ function WorldTable() {
   const [perOneMillion, setPerOneMillion] = useState(false);
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      'http://localhost:8080/covid19/summary/country'
+      `${process.env.REACT_APP_BASE_URL}/covid19/summaryOfAllCountries`
     );
     const result = await response.json();
     return result;

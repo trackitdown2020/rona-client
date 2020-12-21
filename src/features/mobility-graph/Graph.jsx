@@ -15,7 +15,7 @@ function Graph({ locations }) {
   const { value, loading, error } = useAsync(async () => {
     // Change to url builder
     const response = await fetch(
-      `http://localhost:8080/covid19/mobility?country=US&type=all`
+      `${process.env.REACT_APP_BASE_URL}/covid19/mobility?country=US&type=all`
     );
     const result = await response.json();
     return result;

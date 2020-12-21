@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import useAppState from '../../state/AppStateProvider';
 
-function AutocompleteField() {
-  const { selectedCountry, setSelectedCountry } = useAppState();
+function CountryAutocompleteField(props) {
+  const { country, onChange, overrideStyle } = props;
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
@@ -19,7 +18,7 @@ function AutocompleteField() {
 
     (async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/country/all`
+        `${process.env.REACT_APP_BASE_URL}/covid19/mobility/apple/supportedCountries`
       );
       const countries = await response.json();
 
@@ -48,22 +47,22 @@ function AutocompleteField() {
   };
 
   const handleOnChange = (e, newValue) => {
-    setSelectedCountry(newValue);
+    onChange(newValue);
   };
 
   return (
     <Autocomplete
       id="asynchronous-demo"
-      style={{ width: 300 }}
+      style={overrideStyle ? overrideStyle : { width: 300 }}
       open={open}
       onOpen={handleOnOpen}
       onClose={handleOnClose}
-      getOptionSelect={(option, value) => option.name === value.name}
-      getOptionLabel={(option) => option.name}
+      getOptionSelect={(option, value) => option === value}
+      getOptionLabel={(option) => option}
       options={options}
       loading={loading}
       onChange={handleOnChange}
-      value={selectedCountry}
+      value={country}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -86,4 +85,4 @@ function AutocompleteField() {
   );
 }
 
-export { AutocompleteField };
+export { CountryAutocompleteField };

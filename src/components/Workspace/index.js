@@ -7,6 +7,7 @@ import { WorldChorolpethMap } from '../../features/world-choropleth-map/index.js
 import { MobilityGraph } from '../../features/mobility-graph';
 import { WorldTable } from '../../features/world-table';
 import { Stats } from '../../routes';
+import { AppleMobilityGraph } from '../../features/apple-mobility-graph';
 
 function Workspace() {
     const { workspace } = useParams();
@@ -19,6 +20,8 @@ function Workspace() {
                 return <WorldChorolpethMap />
             case 'mobility':
                 return <MobilityGraph />
+            case 'apple-mobility':
+                return <AppleMobilityGraph/>
         }
     }
 

@@ -10,5 +10,9 @@ export const tabs = [
     {
       label: 'Mobility',
       route: 'mobility'
+    },
+    {
+      label: 'Apple Mobility',
+      route: 'apple-mobility'
     }
 ];  
