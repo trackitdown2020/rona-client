@@ -60,6 +60,9 @@ function VerticalTabs(props) {
       case 'apple-mobility':
         index = 3;
         break;
+      case 'newsfeed-stream':
+        index = 4;
+        break;
       default:
         index = 0;
         break;
@@ -78,6 +81,8 @@ function VerticalTabs(props) {
         return '/heat-map';
       case 'Apple Mobility':
         return '/apple-mobility';
+      case 'Newsfeed Stream':
+        return '/newsfeed-stream';
     }
   };
 
