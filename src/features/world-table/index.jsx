@@ -58,11 +58,11 @@ const perOneMillionColumns = [
 ];
 
 function WorldTable() {
-  const { selectedCountry, setSelectedCountry } = useAppState();
+  const { setSelectedCountry } = useAppState();
   const [perOneMillion, setPerOneMillion] = useState(false);
   const { value, error, loading } = useAsync(async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/covid19/summaryOfAllCountries`
+      `${process.env.REACT_APP_BASE_URL}/covid19/summary/country`
     );
     const result = await response.json();
     return result;

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Newsfeed } from '../../features/newsfeed';
+import StatsToolbar from '../StatsToolbar';
+import useAppState from 'state/AppStateProvider';
+import _ from 'lodash';
 
 function RightToolbar() {
+  const { selectedCountry } = useAppState();
   const pathString = window.location.pathname;
   const workspace = pathString.replace('/', '');
 
@@ -9,6 +13,8 @@ function RightToolbar() {
     switch (workspace) {
       case 'heat-map':
         return null;
+      case 'stats':
+        return !_.isEmpty(selectedCountry) ? <StatsToolbar /> : <Newsfeed />;
       default:
         return <Newsfeed />;
     }
